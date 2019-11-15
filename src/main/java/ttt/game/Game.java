@@ -21,6 +21,10 @@ public class Game {
         return board.getSpaces();
     }
 
+    public Boolean gameOver() {
+        return board.availableSpaces().length == 0;
+    }
+
     public void playTurn() {
         String space = currentPlayer.get_move();
         board = board.occupySpace("X", Integer.parseInt(space));

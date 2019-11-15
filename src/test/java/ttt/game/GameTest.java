@@ -8,7 +8,7 @@ import ttt.player.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     @Test
@@ -62,5 +62,27 @@ public class GameTest {
         game.playTurn();
 
         assertEquals("X", game.boardState()[0]);
+    }
+
+    @Test
+    void theGameIsNotOverWhenTheBoardStillHasFreeSpaces() {
+        Object[] partiallyFilledBoard = {1, 'X', 3, 4, 'O', 6, 7, 'X', 'O'};
+        Board board = new Board(partiallyFilledBoard);
+        Player player1 = new Player("Player 1", "X", new Console());
+        Player player2 = new Player("Player 2", "O", new Console());
+        Game game = new Game(player1, player2, board);
+
+        assertFalse(game.gameOver());
+    }
+
+    @Test
+    void theGameIsOverWhenTheBoardHasNoFreeSpaces() {
+        Object[] filledBoard = {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'};
+        Board board = new Board(filledBoard);
+        Player player1 = new Player("Player 1", "X", new Console());
+        Player player2 = new Player("Player 2", "O", new Console());
+        Game game = new Game(player1, player2, board);
+
+        assertTrue(game.gameOver());
     }
 }
