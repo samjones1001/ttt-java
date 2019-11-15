@@ -9,7 +9,7 @@ public class Board {
         spaces = new Object[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 
-    private Board(Object[] state) {
+    Board(Object[] state) {
         spaces = state;
     }
 
@@ -24,6 +24,10 @@ public class Board {
     public Board occupySpace(char symbol, Integer space) {
         spaces[space] = symbol;
         return new Board(spaces);
+    }
+
+    public Boolean isFull() {
+        return availableSpaces().length == 0;
     }
 }
 
