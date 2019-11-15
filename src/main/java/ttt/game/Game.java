@@ -17,6 +17,14 @@ public class Game {
         return currentPlayer;
     }
 
+    public Player getOpponent() {
+        return opponent;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
     public Object[] boardState() {
         return board.getSpaces();
     }
