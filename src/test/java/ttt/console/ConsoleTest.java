@@ -1,23 +1,12 @@
 package ttt.console;
 
 import org.junit.jupiter.api.Test;
-import ttt.service.IOService;
+import ttt.mocks.MockConsoleIO;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class MockConsoleIO implements IOService {
-    public String lastOutput;
-
-    @Override
-    public void output(String message) {
-        lastOutput = message;
-    }
-
-    @Override
-    public String input() {
-        return "";
-    }
-}
 
 public class ConsoleTest {
     @Test void correctlyDisplaysAnEmptyBoard() {
@@ -51,5 +40,13 @@ public class ConsoleTest {
         console.displayBoard(boardState);
 
         assertEquals(expectedOutput, mockConsoleIO.lastOutput, "should correctly display a filled board");
+    }
+
+    @Test void getsInputFromIO() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+
+        assertEquals("1", console.get_input(), "should get input from io");
     }
 }

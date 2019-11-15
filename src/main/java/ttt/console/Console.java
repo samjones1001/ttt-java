@@ -19,8 +19,13 @@ public class Console {
         consoleIO.output(buildBoardOutput(boardState));
     }
 
+    public String get_input() {
+        return consoleIO.input();
+    }
+
     private String buildBoardOutput(Object[] boardState) {
-        return String.join("\n--------------\n", buildRowStrings(boardState));
+        final String boardSplitter = "\n--------------\n";
+        return String.join(boardSplitter, buildRowStrings(boardState));
     }
 
     private String[] buildRowStrings(Object[] boardState) {
@@ -35,11 +40,13 @@ public class Console {
     }
 
     private String buildRowString(Object[] rowArray) {
+        final String rowSplitter = " | ";
         String[] rowStringArray = Arrays.stream(rowArray).map(Object::toString).toArray(String[]::new);
-        return padRow(String.join(" | ", rowStringArray));
+        return padRow(String.join(rowSplitter, rowStringArray));
     }
 
     private String padRow(String rowString) {
-        return " " + rowString + " ";
+        final String rowPadder = " ";
+        return rowPadder + rowString + rowPadder;
     }
 }
