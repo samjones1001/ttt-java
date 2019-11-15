@@ -14,6 +14,7 @@ public class Player {
     }
 
     public String get_move() {
-        return console.get_input();
+        int machineReadableIndex = Integer.parseInt(console.get_input()) -1;
+        return Integer.toString(machineReadableIndex);
     }
 }

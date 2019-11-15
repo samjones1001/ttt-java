@@ -21,7 +21,7 @@ public class Board {
         return Arrays.stream(spaces).filter(space -> space instanceof Integer).toArray();
     }
 
-    public Board occupySpace(char symbol, Integer space) {
+    public Board occupySpace(String symbol, Integer space) {
         spaces[space] = symbol;
         return new Board(spaces);
     }

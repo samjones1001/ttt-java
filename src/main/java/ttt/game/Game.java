@@ -17,7 +17,13 @@ public class Game {
         return currentPlayer;
     }
 
+    public Object[] boardState() {
+        return board.getSpaces();
+    }
+
     public void playTurn() {
+        String space = currentPlayer.get_move();
+        board = board.occupySpace("X", Integer.parseInt(space));
         switchPlayers();
     }
 

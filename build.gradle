@@ -20,8 +20,24 @@ application {
     mainClassName = 'ttt.App'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ttt.App'
+        )
+    }
+}
+
 test {
-    useJUnitPlatform()
+    useJUnitPlatform{
+        excludeTags 'acceptance'
+    }
+}
+
+task allTests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'acceptance'
+    }
 }
 
 jacocoTestReport {

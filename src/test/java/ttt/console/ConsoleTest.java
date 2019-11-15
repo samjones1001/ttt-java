@@ -17,7 +17,7 @@ public class ConsoleTest {
 
         console.displayBoard(boardState);
 
-        assertEquals(expectedOutput, mockConsoleIO.lastOutput, "should correctly display an empty board");
+        assertEquals(expectedOutput, mockConsoleIO.lastOutput);
     }
 
     @Test void correctlyDisplaysAPartiallyFilledBoard() {
@@ -28,7 +28,7 @@ public class ConsoleTest {
 
         console.displayBoard(boardState);
 
-        assertEquals(expectedOutput, mockConsoleIO.lastOutput, "should correctly display a partially filled board");
+        assertEquals(expectedOutput, mockConsoleIO.lastOutput);
     }
 
     @Test void correctlyDisplaysAFilledBoard() {
@@ -39,7 +39,7 @@ public class ConsoleTest {
 
         console.displayBoard(boardState);
 
-        assertEquals(expectedOutput, mockConsoleIO.lastOutput, "should correctly display a filled board");
+        assertEquals(expectedOutput, mockConsoleIO.lastOutput);
     }
 
     @Test void getsInputFromIO() {
@@ -47,6 +47,6 @@ public class ConsoleTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        assertEquals("1", console.get_input(), "should get input from io");
+        assertEquals("1", console.get_input());
     }
 }
