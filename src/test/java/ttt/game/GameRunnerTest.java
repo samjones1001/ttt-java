@@ -2,19 +2,25 @@ package ttt.game;
 
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
+import ttt.mocks.MockConsoleIO;
 import ttt.player.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameRunnerTest {
     @Test
     public void createsAGameFromThePassedConfigObject() {
-        Player player1 = new Player("Player 1", "X", new Console());
-        Player player2 = new Player("Player 2", "O", new Console());
+        MockConsoleIO mockConsoleIO = new MockConsoleIO();
+        Console console = new Console(mockConsoleIO);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
         Object[] filledBoard = {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'};
         Board board = new Board(filledBoard);
         GameConfig config = new GameConfig(player1, player2, board);
-        GameRunner runner = new GameRunner();
+        GameRunner runner = new GameRunner(console);
 
         runner.run(config);
         Game game = runner.getGame();
@@ -22,5 +28,21 @@ public class GameRunnerTest {
         assertEquals(player1, game.getCurrentPlayer());
         assertEquals(player2, game.getOpponent());
         assertEquals(board, game.getBoard());
+    }
+
+    @Test
+    public void canPlayAFullGame() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        Board board = new Board();
+        GameConfig config = new GameConfig(player1, player2, board);
+        GameRunner runner = new GameRunner(console);
+
+        runner.run(config);
+
+        assertEquals("Game Over", mockConsoleIO.lastOutput);
     }
 }

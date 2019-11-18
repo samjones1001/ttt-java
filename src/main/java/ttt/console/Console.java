@@ -19,8 +19,12 @@ public class Console {
         consoleIO.output(buildBoardOutput(boardState));
     }
 
-    public String get_input() {
+    public String getInput() {
         return consoleIO.input();
+    }
+
+    public void displayOutput(String message) {
+        consoleIO.output(message);
     }
 
     private String buildBoardOutput(Object[] boardState) {

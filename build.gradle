@@ -30,13 +30,12 @@ jar {
 
 test {
     useJUnitPlatform{
-        excludeTags 'acceptance'
     }
 }
 
-task allTests(type: Test) {
+task unitTest(type: Test) {
     useJUnitPlatform {
-        includeTags 'acceptance'
+        excludeTags 'acceptance'
     }
 }
 

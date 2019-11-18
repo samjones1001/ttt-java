@@ -47,6 +47,15 @@ public class ConsoleTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        assertEquals("1", console.get_input());
+        assertEquals("1", console.getInput());
+    }
+
+    @Test void sendsOutputToIO() {
+        MockConsoleIO mockConsoleIO = new MockConsoleIO();
+        Console console = new Console(mockConsoleIO);
+
+        console.displayOutput("Some Output");
+
+        assertEquals("Some Output", mockConsoleIO.lastOutput);
     }
 }

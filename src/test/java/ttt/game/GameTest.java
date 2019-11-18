@@ -15,7 +15,7 @@ public class GameTest {
     void startsWithPlayerOnesTurn() {
         Player player1 = new Player("Player 1", "X", new Console());
         Player player2 = new Player("Player 2", "O", new Console());
-        Game game = new Game(player1, player2, new Board());
+        Game game = new Game(player1, player2, new Board(), new Console());
 
         assertEquals(player1, game.getCurrentPlayer());
     }
@@ -27,7 +27,7 @@ public class GameTest {
         Console console = new Console(mockConsoleIO);
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
-        Game game = new Game(player1, player2, new Board());
+        Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
 
@@ -41,7 +41,7 @@ public class GameTest {
         Console console = new Console(mockConsoleIO);
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
-        Game game = new Game(player1, player2, new Board());
+        Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
         game.playTurn();
@@ -57,7 +57,7 @@ public class GameTest {
 
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
-        Game game = new Game(player1, player2, new Board());
+        Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
 
@@ -70,7 +70,7 @@ public class GameTest {
         Board board = new Board(partiallyFilledBoard);
         Player player1 = new Player("Player 1", "X", new Console());
         Player player2 = new Player("Player 2", "O", new Console());
-        Game game = new Game(player1, player2, board);
+        Game game = new Game(player1, player2, board, new Console());
 
         assertFalse(game.gameOver());
     }
@@ -81,7 +81,7 @@ public class GameTest {
         Board board = new Board(filledBoard);
         Player player1 = new Player("Player 1", "X", new Console());
         Player player2 = new Player("Player 2", "O", new Console());
-        Game game = new Game(player1, player2, board);
+        Game game = new Game(player1, player2, board, new Console());
 
         assertTrue(game.gameOver());
     }

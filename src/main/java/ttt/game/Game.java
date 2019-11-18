@@ -1,16 +1,19 @@
 package ttt.game;
 
+import ttt.console.Console;
 import ttt.player.Player;
 
 public class Game {
     private Player currentPlayer;
     private Player opponent;
     private Board board;
+    private Console console;
 
-    public Game(Player currentPlayer, Player opponent, Board board) {
+    public Game(Player currentPlayer, Player opponent, Board board, Console console) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
+        this.console = console;
     }
 
     public Player getCurrentPlayer() {
@@ -34,8 +37,9 @@ public class Game {
     }
 
     public void playTurn() {
+        this.console.displayBoard(this.board.getSpaces());
         String space = currentPlayer.get_move();
-        board = board.occupySpace("X", Integer.parseInt(space));
+        board = board.occupySpace(currentPlayer.getMarker(), Integer.parseInt(space));
         switchPlayers();
     }
 

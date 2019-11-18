@@ -13,8 +13,12 @@ public class Player {
         this.console = console;
     }
 
+    public String getMarker() {
+        return marker;
+    }
+
     public String get_move() {
-        int machineReadableIndex = Integer.parseInt(console.get_input()) -1;
+        int machineReadableIndex = Integer.parseInt(console.getInput()) -1;
         return Integer.toString(machineReadableIndex);
     }
 }
