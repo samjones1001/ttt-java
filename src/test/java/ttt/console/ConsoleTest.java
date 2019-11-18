@@ -18,7 +18,8 @@ public class ConsoleTest {
         return mockConsoleIO.lastOutput;
     }
 
-    @Test void correctlyDisplaysAnEmptyBoard() {
+    @Test
+    void correctlyDisplaysAnEmptyBoard() {
         String expectedOutput = " 1 | 2 | 3 \n--------------\n 4 | 5 | 6 \n--------------\n 7 | 8 | 9 ";
         Object[] boardState = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -27,7 +28,8 @@ public class ConsoleTest {
         assertEquals(expectedOutput, output);
     }
 
-    @Test void correctlyDisplaysAPartiallyFilledBoard() {
+    @Test
+    void correctlyDisplaysAPartiallyFilledBoard() {
         String expectedOutput = " X | O | X \n--------------\n 4 | 5 | 6 \n--------------\n 7 | 8 | 9 ";
         Object[] boardState = {'X', 'O', 'X', 4, 5, 6, 7, 8, 9};
 
@@ -36,7 +38,8 @@ public class ConsoleTest {
         assertEquals(expectedOutput, output);
     }
 
-    @Test void correctlyDisplaysAFilledBoard() {
+    @Test
+    void correctlyDisplaysAFilledBoard() {
         String expectedOutput = " X | O | X \n--------------\n O | X | O \n--------------\n X | O | X ";
         Object[] boardState = {'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'};
 
@@ -45,25 +48,40 @@ public class ConsoleTest {
         assertEquals(expectedOutput, output);
     }
 
-    @Test void returnsValidInputs() {
+    @Test
+    void returnsValidInputs() {
         String[] validInputs = new String[] {"1"};
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        assertEquals("1", console.getAndValidateInput(validInputs));
+        assertEquals("1", console.getAndValidateInput(validInputs, "Please Provide Valid Input"));
     }
 
-    @Test void continuesToPromptUntilValidInputProvided() {
+    @Test
+    void continuesToPromptUntilValidInputProvided() {
         String[] validInputs = new String[] {"1"};
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("-1", "1000", "Invalid", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        assertEquals("1", console.getAndValidateInput(validInputs));
+        assertEquals("1", console.getAndValidateInput(validInputs, "Please Provide Valid Input"));
     }
 
-    @Test void sendsOutputToIO() {
+    @Test
+    void displaysAnErrorMessageWhenProvidedInvalidInput() {
+        String[] validInputs = new String[] {"1"};
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("Invalid", "1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+
+        console.getAndValidateInput(validInputs, "Please Provide Valid Input");
+
+        assertEquals("Please Provide Valid Input", mockConsoleIO.lastOutput);
+    }
+
+    @Test
+    void sendsOutputToIO() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
 

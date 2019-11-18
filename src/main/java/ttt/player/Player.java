@@ -20,7 +20,6 @@ public class Player {
 
     public int getMove(Game game) {
         String[] spaceStrings = game.availableSpaces();
-        int machineReadableIndex = Integer.parseInt(console.getAndValidateInput(spaceStrings)) -1;
-        return machineReadableIndex;
+        return Integer.parseInt(console.getAndValidateInput(spaceStrings, "Please Provide Valid Input")) -1;
     }
 }
