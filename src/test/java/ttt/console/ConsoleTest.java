@@ -45,12 +45,22 @@ public class ConsoleTest {
         assertEquals(expectedOutput, output);
     }
 
-    @Test void getsInputFromIO() {
+    @Test void returnsValidInputs() {
+        String[] validInputs = new String[] {"1"};
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        assertEquals("1", console.getInput());
+        assertEquals("1", console.getAndValidateInput(validInputs));
+    }
+
+    @Test void continuesToPromptUntilValidInputProvided() {
+        String[] validInputs = new String[] {"1"};
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("-1", "1000", "Invalid", "1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+
+        assertEquals("1", console.getAndValidateInput(validInputs));
     }
 
     @Test void sendsOutputToIO() {

@@ -19,8 +19,12 @@ public class Console {
         consoleIO.output(buildBoardOutput(boardState));
     }
 
-    public String getInput() {
-        return consoleIO.input();
+    public String getAndValidateInput(String[] validInputs) {
+        String input = consoleIO.input();
+        while (!Arrays.asList(validInputs).contains(input)) {
+            return getAndValidateInput(validInputs);
+        }
+        return input;
     }
 
     public void displayOutput(String message) {
