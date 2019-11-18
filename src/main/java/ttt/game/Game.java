@@ -38,7 +38,7 @@ public class Game {
 
     public void playTurn() {
         this.console.displayBoard(this.board.getSpaces());
-        int space = currentPlayer.get_move();
+        int space = currentPlayer.get_move(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
         switchPlayers();
     }

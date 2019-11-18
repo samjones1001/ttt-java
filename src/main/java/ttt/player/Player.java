@@ -1,6 +1,7 @@
 package ttt.player;
 
 import ttt.console.Console;
+import ttt.game.Game;
 
 public class Player {
     private String name;
@@ -17,7 +18,7 @@ public class Player {
         return marker;
     }
 
-    public int get_move() {
+    public int get_move(Game game) {
         int machineReadableIndex = Integer.parseInt(console.getAndValidateInput(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"})) -1;
         return machineReadableIndex;
     }
