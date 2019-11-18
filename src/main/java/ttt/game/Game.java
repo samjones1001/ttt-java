@@ -43,7 +43,6 @@ public class Game {
         return spaceStrings;
     }
 
-
     public Boolean gameOver() {
         return board.availableSpaces().length == 0;
     }
