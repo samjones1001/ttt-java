@@ -17,8 +17,8 @@ public class Player {
         return marker;
     }
 
-    public String get_move() {
+    public int get_move() {
         int machineReadableIndex = Integer.parseInt(console.getInput()) -1;
-        return Integer.toString(machineReadableIndex);
+        return machineReadableIndex;
     }
 }

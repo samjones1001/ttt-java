@@ -1,5 +1,6 @@
 package ttt.game;
 
+import ttt.console.Console;
 import ttt.player.Player;
 
 public class GameConfig {

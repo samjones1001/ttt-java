@@ -15,12 +15,12 @@ public class GameRunnerTest {
     public void createsAGameFromThePassedConfigObject() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
+        GameRunner runner = new GameRunner(console);
+
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
-        Object[] filledBoard = {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'};
-        Board board = new Board(filledBoard);
+        Board board = new Board(new Object[] {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'});
         GameConfig config = new GameConfig(player1, player2, board);
-        GameRunner runner = new GameRunner(console);
 
         runner.run(config);
         Game game = runner.getGame();
@@ -35,11 +35,12 @@ public class GameRunnerTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
+        GameRunner runner = new GameRunner(console);
+
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
         Board board = new Board();
         GameConfig config = new GameConfig(player1, player2, board);
-        GameRunner runner = new GameRunner(console);
 
         runner.run(config);
 

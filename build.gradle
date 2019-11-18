@@ -29,8 +29,12 @@ jar {
 }
 
 test {
-    useJUnitPlatform{
-    }
+    useJUnitPlatform{}
+}
+
+task runApp(type:Exec) {
+    workingDir '.'
+    commandLine 'java', '-jar', './build/libs/ttt.jar'
 }
 
 task unitTest(type: Test) {

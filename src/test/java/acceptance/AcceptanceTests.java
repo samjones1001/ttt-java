@@ -19,29 +19,11 @@ public class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-
-
-        output.write("1");
-        output.newLine();
-        output.write("2");
-        output.newLine();
-        output.write("3");
-        output.newLine();
-        output.write("4");
-        output.newLine();
-        output.write("5");
-        output.newLine();
-        output.write("6");
-        output.newLine();
-        output.write("7");
-        output.newLine();
-        output.write("8");
-        output.newLine();
-        output.write("9");
-        output.newLine();
+        for (int index = 1; index <= 9; index++) {
+            output.write(Integer.toString(index));
+            output.newLine();
+        }
         output.close();
-
-
 
         String lastLine = "";
         String currentLine;

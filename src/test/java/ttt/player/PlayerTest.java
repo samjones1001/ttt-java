@@ -27,6 +27,6 @@ public class PlayerTest {
         Console console = new Console(consoleIO);
         Player player = new Player("Player 1", "X", console);
 
-        assertEquals("0", player.get_move());
+        assertEquals(0, player.get_move());
     }
 }

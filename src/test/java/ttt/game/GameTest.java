@@ -11,6 +11,14 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
+    private Game setupGame(ArrayList<String> gameInputs) {
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(gameInputs);
+        Console console = new Console(mockConsoleIO);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        return new Game(player1, player2, new Board(), console);
+    }
+
     @Test
     void startsWithPlayerOnesTurn() {
         Player player1 = new Player("Player 1", "X", new Console());
@@ -39,6 +47,7 @@ public class GameTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
+
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
