@@ -32,13 +32,25 @@ public class Game {
         return board.getSpaces();
     }
 
+    public String[] availableSpaces() {
+        Object[] availableSpaces = board.availableSpaces();
+        String[] spaceStrings = new String[availableSpaces.length];
+
+        for (int index = 0; index < availableSpaces.length; index++ ) {
+            spaceStrings[index] = (String.valueOf(availableSpaces[index]));
+        }
+
+        return spaceStrings;
+    }
+
+
     public Boolean gameOver() {
         return board.availableSpaces().length == 0;
     }
 
     public void playTurn() {
         this.console.displayBoard(this.board.getSpaces());
-        int space = currentPlayer.get_move(this);
+        int space = currentPlayer.getMove(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
         switchPlayers();
     }
