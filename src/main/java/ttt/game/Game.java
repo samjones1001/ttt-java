@@ -1,7 +1,7 @@
 package ttt.game;
 
-import ttt.console.Console;
 import ttt.player.Player;
+import ttt.service.ClientService;
 
 import java.util.Formatter;
 
@@ -9,7 +9,7 @@ public class Game {
     private Player currentPlayer;
     private Player opponent;
     private Board board;
-    private Console console;
+    private ClientService userInterface;
     private GameRules rules;
     private String previousMove;
 
@@ -18,13 +18,12 @@ public class Game {
     private static String winningPlayerBaseString = "%s Won!";
     private static String turnStartBaseString = "%s's turn.";
     private static String opponentMoveBaseString = " %s took space %s.";
-    private static String opponentSpaceMoveBaseString = " space %s.";
 
-    public Game(Player currentPlayer, Player opponent, Board board, Console console) {
+    public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
-        this.console = console;
+        this.userInterface = userInterface;
         this.rules = new GameRules();
     }
 
@@ -56,8 +55,8 @@ public class Game {
     }
 
     public void playTurn() {
-        this.console.displayBoard(this.board.getSpaces());
-        this.console.displayOutput(turnStartMessage());
+        this.userInterface.displayBoard(this.board.getSpaces());
+        this.userInterface.displayOutput(turnStartMessage());
 
         int space = currentPlayer.getMove(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
@@ -80,11 +79,11 @@ public class Game {
     }
 
     private void gameOverScreen() {
-        this.console.displayBoard(this.board.getSpaces());
+        this.userInterface.displayBoard(this.board.getSpaces());
         String message = gameOverBaseString;
         message += rules.isTied(board) ? tieString : winningPlayerMessage();
 
-        console.displayOutput(message);
+        userInterface.displayOutput(message);
     }
 
     private String winningPlayerMessage() {

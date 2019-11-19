@@ -1,10 +1,11 @@
 package ttt.console;
 
 import ttt.service.IOService;
+import ttt.service.ClientService;
 
 import java.util.Arrays;
 
-public class Console {
+public class Console implements ClientService {
     private IOService consoleIO;
 
     private static final String boardSplitter = "\n--------------\n";
@@ -19,15 +20,18 @@ public class Console {
         this.consoleIO = consoleIO;
     }
 
+    @Override
     public void displayBoard(Object[] boardState) {
         consoleIO.clear();
         consoleIO.output(buildBoardOutput(boardState));
     }
 
+    @Override
     public void displayOutput(String message) {
         consoleIO.output(message);
     }
 
+    @Override
     public String getAndValidateInput(String[] validInputs, String errorMessage) {
         String input = consoleIO.input();
         while (!Arrays.asList(validInputs).contains(input)) {

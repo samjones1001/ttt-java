@@ -1,19 +1,19 @@
 package ttt.player;
 
-import ttt.console.Console;
 import ttt.game.Game;
+import ttt.service.ClientService;
 
 public class Player {
     private String name;
     private String marker;
-    private Console console;
+    private ClientService userInterface;
 
     private static final String moveError = "Please Provide Valid Input";
 
-    public Player(String name, String marker, Console console) {
+    public Player(String name, String marker, ClientService userInterface) {
         this.name = name;
         this.marker = marker;
-        this.console = console;
+        this.userInterface = userInterface;
     }
 
     public String getName() {
@@ -26,6 +26,6 @@ public class Player {
 
     public int getMove(Game game) {
         String[] spaceStrings = game.availableSpaces();
-        return Integer.parseInt(console.getAndValidateInput(spaceStrings, moveError)) -1;
+        return Integer.parseInt(userInterface.getAndValidateInput(spaceStrings, moveError)) -1;
     }
 }
