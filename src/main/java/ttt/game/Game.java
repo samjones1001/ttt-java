@@ -69,6 +69,7 @@ public class Game {
     }
 
     private void gameOverScreen() {
+        this.console.displayBoard(this.board.getSpaces());
         String message = "Game Over - ";
         message += rules.isTied(board) ? "It's a Tie!" : winningPlayerString();
 

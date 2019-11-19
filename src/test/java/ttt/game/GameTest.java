@@ -59,6 +59,21 @@ public class GameTest {
     }
 
     @Test
+    void theScreenIsClearedAtTheStartOfEachTurn() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        Game game = new Game(player1, player2, new Board(), console);
+
+        game.playTurn();
+
+        assertEquals(1, mockConsoleIO.clearCallCount);
+    }
+
+    @Test
     void addsAMarkerToTheBoard() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);

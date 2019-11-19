@@ -16,6 +16,7 @@ public class Console {
     }
 
     public void displayBoard(Object[] boardState) {
+        clearOutput();
         consoleIO.output(buildBoardOutput(boardState));
     }
 
@@ -31,6 +32,8 @@ public class Console {
     public void displayOutput(String message) {
         consoleIO.output(message);
     }
+
+    public void clearOutput() { consoleIO.clear(); }
 
     private String buildBoardOutput(Object[] boardState) {
         final String boardSplitter = "\n--------------\n";

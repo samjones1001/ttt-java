@@ -4,4 +4,6 @@ public interface IOService {
     String input();
 
     void output(String message);
+
+    void clear();
 }
