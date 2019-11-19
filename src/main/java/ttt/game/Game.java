@@ -1,5 +1,6 @@
 package ttt.game;
 
+import ttt.messaging.MessageBuilder;
 import ttt.player.Player;
 import ttt.service.ClientService;
 
@@ -12,12 +13,13 @@ public class Game {
     private ClientService userInterface;
     private GameRules rules;
     private String previousMove;
+    private MessageBuilder messageBuilder;
 
-    private static String gameOverBaseString = "Game Over - ";
-    private static String tieString = "It's a Tie!";
-    private static String winningPlayerBaseString = "%s Won!";
-    private static String turnStartBaseString = "%s's turn.";
-    private static String opponentMoveBaseString = " %s took space %s.";
+    private static final String gameOverBaseString = "Game Over - ";
+    private static final String tieString = "It's a Tie!";
+    private static final String winningPlayerBaseString = "%s Won!";
+    private static final String turnStartBaseString = "%s's turn.";
+    private static final String opponentMoveBaseString = " %s took space %s.";
 
     public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
         this.currentPlayer = currentPlayer;
@@ -25,6 +27,7 @@ public class Game {
         this.board = board;
         this.userInterface = userInterface;
         this.rules = new GameRules();
+        this.messageBuilder = new MessageBuilder();
     }
 
     public Player getCurrentPlayer() {
@@ -87,22 +90,15 @@ public class Game {
     }
 
     private String winningPlayerMessage() {
-        return interpolateString(winningPlayerBaseString, opponent.getName());
+        return messageBuilder.buildMessage(winningPlayerBaseString, opponent.getName());
     }
 
     private String turnStartMessage() {
-        String message = interpolateString(turnStartBaseString, currentPlayer.getName());
+        String message = messageBuilder.buildMessage(turnStartBaseString, currentPlayer.getName());
         if (previousMove != null) {
             message +=  opponentMoveBaseString;
-            return interpolateString(message, opponent.getName(), previousMove);
+            return messageBuilder.buildMessage(message, opponent.getName(), previousMove);
         }
         return message;
-    }
-
-    private String interpolateString(String baseString, String... values) {
-        StringBuilder builder = new StringBuilder();
-        Formatter formatter = new Formatter(builder);
-        formatter.format(baseString, values);
-        return builder.toString();
     }
 }

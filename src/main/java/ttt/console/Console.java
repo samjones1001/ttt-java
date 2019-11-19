@@ -34,7 +34,7 @@ public class Console implements ClientService {
     @Override
     public String getAndValidateInput(String[] validInputs, String errorMessage) {
         String input = consoleIO.input();
-        while (!Arrays.asList(validInputs).contains(input)) {
+        while (!isValidInput(input, validInputs)) {
             displayOutput(errorMessage);
             return getAndValidateInput(validInputs, errorMessage);
         }
@@ -63,5 +63,9 @@ public class Console implements ClientService {
 
     private String padRow(String rowString) {
         return rowPadder + rowString + rowPadder;
+    }
+
+    private Boolean isValidInput(String input, String[] validInputs) {
+        return Arrays.asList(validInputs).contains(input);
     }
 }
