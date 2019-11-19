@@ -32,7 +32,7 @@ public class GameRunnerTest {
 
     @Test
     public void canPlayAFullGame() {
-        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7", "6", "9", "8"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         GameRunner runner = new GameRunner(console);
@@ -44,6 +44,6 @@ public class GameRunnerTest {
 
         runner.run(config);
 
-        assertEquals("Game Over", mockConsoleIO.lastOutput);
+        assertEquals("Game Over - It's a Tie!", mockConsoleIO.lastOutput);
     }
 }

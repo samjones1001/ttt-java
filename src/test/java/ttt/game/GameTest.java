@@ -75,7 +75,7 @@ public class GameTest {
 
     @Test
     void theGameIsNotOverWhenTheBoardStillHasFreeSpaces() {
-        Object[] partiallyFilledBoard = {1, 'X', 3, 4, 'O', 6, 7, 'X', 'O'};
+        Object[] partiallyFilledBoard = {1, "X", 3, 4, "O", 6, 7, "X", "O"};
         Board board = new Board(partiallyFilledBoard);
         Player player1 = new Player("Player 1", "X", new Console());
         Player player2 = new Player("Player 2", "O", new Console());
@@ -86,12 +86,55 @@ public class GameTest {
 
     @Test
     void theGameIsOverWhenTheBoardHasNoFreeSpaces() {
-        Object[] filledBoard = {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'};
+        Object[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
         Board board = new Board(filledBoard);
         Player player1 = new Player("Player 1", "X", new Console());
         Player player2 = new Player("Player 2", "O", new Console());
         Game game = new Game(player1, player2, board, new Console());
 
         assertTrue(game.gameOver());
+    }
+
+    @Test
+    void theGameIsOverWhenTheGameHasBeenWon() {
+        Object[] wonBoard = {"X", "X", "X", 4, 5, 6, 7, 8, 9};
+        Board board = new Board(wonBoard);
+        Player player1 = new Player("Player 1", "X", new Console());
+        Player player2 = new Player("Player 2", "O", new Console());
+        Game game = new Game(player1, player2, board, new Console());
+
+        assertTrue(game.gameOver());
+    }
+
+    @Test
+    void aMessageIsDisplayedWhenTheGameIsTied() {
+        MockConsoleIO mockConsoleIO = new MockConsoleIO();
+        Console console = new Console(mockConsoleIO);
+
+        Object[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
+        Board board = new Board(filledBoard);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        Game game = new Game(player1, player2, board, console);
+
+        game.gameOver();
+
+        assertEquals("Game Over - It's a Tie!", mockConsoleIO.lastOutput);
+    }
+
+    @Test
+    void aMessageIsDisplayedWhenTheGameIsWon() {
+        MockConsoleIO mockConsoleIO = new MockConsoleIO();
+        Console console = new Console(mockConsoleIO);
+
+        Object[] filledBoard = {"X", "X", "X", 4, 5, 6, 7, 8, 9};
+        Board board = new Board(filledBoard);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        Game game = new Game(player1, player2, board, console);
+
+        game.gameOver();
+
+        assertEquals("Game Over - Player 2 Won!", mockConsoleIO.lastOutput);
     }
 }

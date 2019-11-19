@@ -3,17 +3,21 @@ package ttt.game;
 import ttt.console.Console;
 import ttt.player.Player;
 
+import java.util.Formatter;
+
 public class Game {
     private Player currentPlayer;
     private Player opponent;
     private Board board;
     private Console console;
+    private GameRules rules;
 
     public Game(Player currentPlayer, Player opponent, Board board, Console console) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
         this.console = console;
+        this.rules = new GameRules();
     }
 
     public Player getCurrentPlayer() {
@@ -44,7 +48,11 @@ public class Game {
     }
 
     public Boolean gameOver() {
-        return board.availableSpaces().length == 0;
+        if (rules.isTied(board) || rules.isWon(board)) {
+            gameOverScreen();
+            return true;
+        }
+        return false;
     }
 
     public void playTurn() {
@@ -58,5 +66,19 @@ public class Game {
         Player temp = currentPlayer;
         currentPlayer = opponent;
         opponent = temp;
+    }
+
+    private void gameOverScreen() {
+        String message = "Game Over - ";
+        message += rules.isTied(board) ? "It's a Tie!" : winningPlayerString();
+
+        console.displayOutput(message);
+    }
+
+    private String winningPlayerString() {
+        StringBuilder builder = new StringBuilder();
+        Formatter formatter = new Formatter(builder);
+        formatter.format("%s Won!", opponent.getName());
+        return builder.toString();
     }
 }

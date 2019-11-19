@@ -14,6 +14,10 @@ public class Player {
         this.console = console;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getMarker() {
         return marker;
     }

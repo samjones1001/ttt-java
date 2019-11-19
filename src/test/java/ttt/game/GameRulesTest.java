@@ -60,7 +60,8 @@ public class GameRulesTest {
         assertTrue(rules.isWon(board));
     }
 
-    @Test void aHorizontalLineCanWin() {
+    @Test
+    public void aDiagonalLineCanWin() {
         Object[] boardState = new Object[] {"X", 2, 3, 4, "X", 6, 7, 8, "X"};
         Board board = new Board(boardState);
         GameRules rules = new GameRules();

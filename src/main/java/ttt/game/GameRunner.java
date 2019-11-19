@@ -19,6 +19,5 @@ public class GameRunner {
         while (!game.gameOver()) {
             game.playTurn();
         }
-        console.displayOutput("Game Over");
     }
 }
