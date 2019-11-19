@@ -7,6 +7,10 @@ import java.util.Arrays;
 public class Console {
     private IOService consoleIO;
 
+    private static final String boardSplitter = "\n--------------\n";
+    private static final String rowSplitter = " | ";
+    private static final String rowPadder = " ";
+
     public Console() {
         consoleIO = new ConsoleIO();
     }
@@ -16,8 +20,12 @@ public class Console {
     }
 
     public void displayBoard(Object[] boardState) {
-        clearOutput();
+        consoleIO.clear();
         consoleIO.output(buildBoardOutput(boardState));
+    }
+
+    public void displayOutput(String message) {
+        consoleIO.output(message);
     }
 
     public String getAndValidateInput(String[] validInputs, String errorMessage) {
@@ -29,14 +37,7 @@ public class Console {
         return input;
     }
 
-    public void displayOutput(String message) {
-        consoleIO.output(message);
-    }
-
-    public void clearOutput() { consoleIO.clear(); }
-
     private String buildBoardOutput(Object[] boardState) {
-        final String boardSplitter = "\n--------------\n";
         return String.join(boardSplitter, buildRowStrings(boardState));
     }
 
@@ -52,13 +53,11 @@ public class Console {
     }
 
     private String buildRowString(Object[] rowArray) {
-        final String rowSplitter = " | ";
         String[] rowStringArray = Arrays.stream(rowArray).map(Object::toString).toArray(String[]::new);
         return padRow(String.join(rowSplitter, rowStringArray));
     }
 
     private String padRow(String rowString) {
-        final String rowPadder = " ";
         return rowPadder + rowString + rowPadder;
     }
 }

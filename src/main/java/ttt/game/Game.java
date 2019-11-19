@@ -11,7 +11,14 @@ public class Game {
     private Board board;
     private Console console;
     private GameRules rules;
-    private Integer previousMove;
+    private String previousMove;
+
+    private static String gameOverBaseString = "Game Over - ";
+    private static String tieString = "It's a Tie!";
+    private static String winningPlayerBaseString = "%s Won!";
+    private static String turnStartBaseString = "%s's turn.";
+    private static String opponentMoveBaseString = " %s took space %s.";
+    private static String opponentSpaceMoveBaseString = " space %s.";
 
     public Game(Player currentPlayer, Player opponent, Board board, Console console) {
         this.currentPlayer = currentPlayer;
@@ -48,22 +55,22 @@ public class Game {
         return spaceStrings;
     }
 
-    public Boolean gameOver() {
-        if (rules.isTied(board) || rules.isWon(board)) {
-            gameOverScreen();
-            return true;
-        }
-        return false;
-    }
-
     public void playTurn() {
         this.console.displayBoard(this.board.getSpaces());
         this.console.displayOutput(turnStartMessage());
 
         int space = currentPlayer.getMove(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
-        previousMove = space + 1;
+        previousMove = Integer.toString(space + 1);
         switchPlayers();
+    }
+
+    public Boolean gameOver() {
+        if (rules.isTied(board) || rules.isWon(board)) {
+            gameOverScreen();
+            return true;
+        }
+        return false;
     }
 
     private void switchPlayers() {
@@ -74,27 +81,29 @@ public class Game {
 
     private void gameOverScreen() {
         this.console.displayBoard(this.board.getSpaces());
-        String message = "Game Over - ";
-        message += rules.isTied(board) ? "It's a Tie!" : winningPlayerMessage();
+        String message = gameOverBaseString;
+        message += rules.isTied(board) ? tieString : winningPlayerMessage();
 
         console.displayOutput(message);
     }
 
     private String winningPlayerMessage() {
-        StringBuilder builder = new StringBuilder();
-        Formatter formatter = new Formatter(builder);
-        formatter.format("%s Won!", opponent.getName());
-        return builder.toString();
+        return interpolateString(winningPlayerBaseString, opponent.getName());
     }
 
     private String turnStartMessage() {
+        String message = interpolateString(turnStartBaseString, currentPlayer.getName());
+        if (previousMove != null) {
+            message +=  opponentMoveBaseString;
+            return interpolateString(message, opponent.getName(), previousMove);
+        }
+        return message;
+    }
+
+    private String interpolateString(String baseString, String... values) {
         StringBuilder builder = new StringBuilder();
         Formatter formatter = new Formatter(builder);
-        if (previousMove != null) {
-            formatter.format("%s's turn. %s took space %s", currentPlayer.getName(), opponent.getName(), previousMove);
-        } else {
-            formatter.format("%s's turn.", currentPlayer.getName());
-        }
+        formatter.format(baseString, values);
         return builder.toString();
     }
 }
