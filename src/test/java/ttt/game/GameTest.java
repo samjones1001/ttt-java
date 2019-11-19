@@ -11,12 +11,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
-    private Game setupGame(ArrayList<String> gameInputs) {
+    private Game setupGame(ArrayList<String> gameInputs, Object[] boardState) {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(gameInputs);
         Console console = new Console(mockConsoleIO);
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
-        return new Game(player1, player2, new Board(), console);
+        return new Game(player1, player2, new Board(boardState), console);
     }
 
     @Test
@@ -74,14 +74,39 @@ public class GameTest {
     }
 
     @Test
-    void addsAMarkerToTheBoard() {
+    void displaysAMessageWithNoPreviousMoveOnFirstTurn() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
-
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
+
+        game.playTurn();
+
+        assertEquals("Player 1's turn.", mockConsoleIO.lastOutput);
+    }
+
+    @Test
+    void displaysAMessageWithPreviousMoveOnSusequentTurns() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Player player1 = new Player("Player 1", "X", console);
+        Player player2 = new Player("Player 2", "O", console);
+        Game game = new Game(player1, player2, new Board(), console);
+
+        game.playTurn();
+        game.playTurn();
+
+        assertEquals("Player 2's turn. Player 1 took space 1", mockConsoleIO.lastOutput);
+    }
+
+    @Test
+    void addsAMarkerToTheBoard() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
+        Object[] boardState = new Object[]{1,2,3,4,5,6,7,8,9};
+        Game game = setupGame(inputs, boardState);
 
         game.playTurn();
 
@@ -90,6 +115,7 @@ public class GameTest {
 
     @Test
     void theGameIsNotOverWhenTheBoardStillHasFreeSpaces() {
+        ArrayList<String> inputs = new ArrayList<>();
         Object[] partiallyFilledBoard = {1, "X", 3, 4, "O", 6, 7, "X", "O"};
         Board board = new Board(partiallyFilledBoard);
         Player player1 = new Player("Player 1", "X", new Console());

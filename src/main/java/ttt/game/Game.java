@@ -11,6 +11,7 @@ public class Game {
     private Board board;
     private Console console;
     private GameRules rules;
+    private Integer previousMove;
 
     public Game(Player currentPlayer, Player opponent, Board board, Console console) {
         this.currentPlayer = currentPlayer;
@@ -57,8 +58,11 @@ public class Game {
 
     public void playTurn() {
         this.console.displayBoard(this.board.getSpaces());
+        this.console.displayOutput(turnStartMessage());
+
         int space = currentPlayer.getMove(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
+        previousMove = space + 1;
         switchPlayers();
     }
 
@@ -71,15 +75,26 @@ public class Game {
     private void gameOverScreen() {
         this.console.displayBoard(this.board.getSpaces());
         String message = "Game Over - ";
-        message += rules.isTied(board) ? "It's a Tie!" : winningPlayerString();
+        message += rules.isTied(board) ? "It's a Tie!" : winningPlayerMessage();
 
         console.displayOutput(message);
     }
 
-    private String winningPlayerString() {
+    private String winningPlayerMessage() {
         StringBuilder builder = new StringBuilder();
         Formatter formatter = new Formatter(builder);
         formatter.format("%s Won!", opponent.getName());
+        return builder.toString();
+    }
+
+    private String turnStartMessage() {
+        StringBuilder builder = new StringBuilder();
+        Formatter formatter = new Formatter(builder);
+        if (previousMove != null) {
+            formatter.format("%s's turn. %s took space %s", currentPlayer.getName(), opponent.getName(), previousMove);
+        } else {
+            formatter.format("%s's turn.", currentPlayer.getName());
+        }
         return builder.toString();
     }
 }
