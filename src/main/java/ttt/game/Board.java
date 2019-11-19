@@ -9,7 +9,7 @@ public class Board {
         spaces = new Object[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 
-    Board(Object[] state) {
+    public Board(Object[] state) {
         spaces = state;
     }
 

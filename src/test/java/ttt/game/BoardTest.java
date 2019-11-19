@@ -18,7 +18,7 @@ class BoardTest {
         assertEquals(8, newBoard.availableSpaces().length);
     }
 
-    @Test void occupiedSpacesAreMaintainedInState() {
+    @Test void occupiedSpacesAreRemainOccupied() {
         Board board = new Board();
         Board newBoard = board.occupySpace("X", 0);
 

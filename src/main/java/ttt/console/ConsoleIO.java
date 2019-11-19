@@ -8,6 +8,8 @@ public class ConsoleIO implements IOService {
 
     private final Scanner in;
 
+    private static final String clearScreen = "\033[H\033[2J";
+
     public ConsoleIO() {
         this.in = new Scanner(System.in);
     }
@@ -20,5 +22,10 @@ public class ConsoleIO implements IOService {
     @Override
     public void output(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void clear() {
+        System.out.print(clearScreen);
     }
 }

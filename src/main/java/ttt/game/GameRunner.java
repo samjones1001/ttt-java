@@ -1,13 +1,13 @@
 package ttt.game;
 
-import ttt.console.Console;
+import ttt.service.ClientService;
 
 public class GameRunner {
     private Game game;
-    private Console console;
+    private ClientService userInterface;
 
-    public GameRunner(Console console) {
-        this.console = console;
+    public GameRunner(ClientService userInterface) {
+        this.userInterface = userInterface;
     }
 
     public Game getGame() {
@@ -15,10 +15,9 @@ public class GameRunner {
     }
 
     public void run(GameConfig config) {
-        game = new Game(config.getCurrentPlayer(), config.getOpponent(), config.getBoard(), this.console);
+        game = new Game(config.getCurrentPlayer(), config.getOpponent(), config.getBoard(), this.userInterface);
         while (!game.gameOver()) {
             game.playTurn();
         }
-        console.displayOutput("Game Over");
     }
 }
