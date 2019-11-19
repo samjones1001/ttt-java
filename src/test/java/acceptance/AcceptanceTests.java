@@ -20,7 +20,6 @@ public class AcceptanceTests {
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
         var inputs = new String[] {"1", "2", "3", "4", "5", "7", "6", "9", "8"};
-
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -50,7 +49,6 @@ public class AcceptanceTests {
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
         var inputs = new String[] {"-1", "0", "10000", "Not Valid", "1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
-
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -80,7 +78,6 @@ public class AcceptanceTests {
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
         var inputs = new String[] {"1", "2", "3", "4", "5", "6", "7"};
-
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
