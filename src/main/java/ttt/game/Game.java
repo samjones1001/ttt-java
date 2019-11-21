@@ -3,12 +3,11 @@ package ttt.game;
 import ttt.messaging.MessageBuilder;
 import ttt.player.Player;
 import ttt.service.ClientService;
-
-import java.util.Formatter;
+import ttt.service.PlayerService;
 
 public class Game {
-    private Player currentPlayer;
-    private Player opponent;
+    private PlayerService currentPlayer;
+    private PlayerService opponent;
     private Board board;
     private ClientService userInterface;
     private GameRules rules;
@@ -21,7 +20,7 @@ public class Game {
     private static final String turnStartBaseString = "%s's turn.";
     private static final String opponentMoveBaseString = " %s took space %s.";
 
-    public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
+    public Game(PlayerService currentPlayer, PlayerService opponent, Board board, ClientService userInterface) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
@@ -30,11 +29,11 @@ public class Game {
         this.messageBuilder = new MessageBuilder();
     }
 
-    public Player getCurrentPlayer() {
+    public PlayerService getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public Player getOpponent() {
+    public PlayerService getOpponent() {
         return opponent;
     }
 
@@ -76,7 +75,7 @@ public class Game {
     }
 
     private void switchPlayers() {
-        Player temp = currentPlayer;
+        PlayerService temp = currentPlayer;
         currentPlayer = opponent;
         opponent = temp;
     }

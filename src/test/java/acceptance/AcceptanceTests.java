@@ -2,11 +2,18 @@ package acceptance;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ttt.console.Console;
+import ttt.game.Board;
+import ttt.game.Game;
+import ttt.mocks.MockConsoleIO;
+import ttt.player.Player;
+import ttt.player.UnbeatablePlayer;
+import ttt.service.ClientService;
+import ttt.service.PlayerService;
 
 import java.io.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("acceptance")
 public class AcceptanceTests {
@@ -95,5 +102,20 @@ public class AcceptanceTests {
 
         assertEquals("Game Over - Player 1 Won!", lastLine);
         assertNull(err.readLine());
+    }
+
+    @Test
+    void takesNoLongerThanASecondForAnUnbeatablePlayerToMakeAMoveOnAnEmpty3x3Grid() {
+        MockConsoleIO mockConsoleIO = new MockConsoleIO();
+        ClientService console = new Console(mockConsoleIO);
+        PlayerService playerOne = new UnbeatablePlayer("Player 1", "X");
+        PlayerService playerTwo = new UnbeatablePlayer("Player 2", "O");
+        Game game = new Game(playerOne, playerTwo, new Board(), console);
+
+        long startTime = System.currentTimeMillis();
+        playerOne.getMove(game);
+        long endTime = System.currentTimeMillis();
+
+        assertTrue((endTime - startTime) < 1000000);
     }
 }

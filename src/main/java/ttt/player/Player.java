@@ -2,8 +2,9 @@ package ttt.player;
 
 import ttt.game.Game;
 import ttt.service.ClientService;
+import ttt.service.PlayerService;
 
-public class Player {
+public class Player implements PlayerService {
     private String name;
     private String marker;
     private ClientService userInterface;
@@ -16,15 +17,18 @@ public class Player {
         this.userInterface = userInterface;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getMarker() {
         return marker;
     }
 
-    public int getMove(Game game) {
+    @Override
+    public Integer getMove(Game game) {
         String[] spaceStrings = game.availableSpaces();
         return Integer.parseInt(userInterface.getAndValidateInput(spaceStrings, moveError)) -1;
     }

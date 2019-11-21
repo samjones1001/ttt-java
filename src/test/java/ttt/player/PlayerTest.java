@@ -5,6 +5,7 @@ import ttt.console.Console;
 import ttt.game.Board;
 import ttt.game.Game;
 import ttt.mocks.MockConsoleIO;
+import ttt.service.PlayerService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class PlayerTest {
     void acceptsValidInputAndTransformsToMachineReadableIndex() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         Game game = setupGame(inputs);
-        Player player = game.getCurrentPlayer();
+        PlayerService player = game.getCurrentPlayer();
 
         assertEquals(0, player.getMove(game));
     }
@@ -49,7 +50,7 @@ public class PlayerTest {
     void continuesToPromptIfProvidedInvalidSpaceIndex() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("-1", "0", "1000", "not valid", "1"));
         Game game = setupGame(inputs);
-        Player player = game.getCurrentPlayer();
+        PlayerService player = game.getCurrentPlayer();
 
         assertEquals(0, player.getMove(game));
     }
@@ -58,7 +59,7 @@ public class PlayerTest {
     void continuesToPromptIfProvidedOccupiedSpaceIndex() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "1", "1", "2"));
         Game game = setupGame(inputs);
-        Player player = game.getCurrentPlayer();
+        PlayerService player = game.getCurrentPlayer();
 
         game.playTurn();
 
