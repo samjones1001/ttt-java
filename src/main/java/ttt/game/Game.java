@@ -73,7 +73,7 @@ public class Game {
     }
 
     public Boolean gameOver() {
-        if (rules.isTied(board) || rules.isWon(board, getOpponent().getMarker())) {
+        if (rules.isGameOver(board, currentPlayer.getMarker(), opponent.getMarker())) {
             gameOverScreen();
             return true;
         }

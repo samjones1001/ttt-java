@@ -5,14 +5,9 @@ import ttt.game.Game;
 import ttt.game.GameRules;
 import ttt.service.PlayerService;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class UnbeatablePlayer implements PlayerService {
     private String name;
     private String marker;
-    private Game game;
     private GameRules rules;
     private String thisPlayerMarker;
     private String opponentMarker;
@@ -46,7 +41,7 @@ public class UnbeatablePlayer implements PlayerService {
         for (Integer move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(thisPlayerMarker, (int) move);
 
-            int score = minimax(newBoard, opponentMarker);
+            int score = minimax(newBoard, 4, opponentMarker);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
@@ -56,22 +51,21 @@ public class UnbeatablePlayer implements PlayerService {
     }
 
     private void setFields(Game game) {
-        this.game = game;
         this.rules = game.getRules();
         this.thisPlayerMarker = game.getCurrentPlayer().getMarker();
         this.opponentMarker = game.getOpponent().getMarker();
     }
 
-    private int minimax(Board board, String nextMarker) {
+    private int minimax(Board board, int depth, String nextMarker) {
         Integer score = getScore(board);
-        if (score != null) {
+        if (rules.isGameOver(board, thisPlayerMarker, opponentMarker) || depth == 0) {
             return score;
         }
 
         if (nextMarker.equals(thisPlayerMarker)) {
-            return maximise(board, nextMarker);
+            return maximise(board,depth-1, nextMarker);
         } else {
-            return minimise(board, nextMarker);
+            return minimise(board,depth-1, nextMarker);
         }
     }
 
@@ -80,18 +74,16 @@ public class UnbeatablePlayer implements PlayerService {
             return 1;
         } else if (rules.isWon(board, opponentMarker)) {
             return -1;
-        } else if (rules.isTied(board)) {
-            return 0;
         } else {
-            return null;
+            return 0;
         }
     }
 
-    private int maximise(Board board, String marker) {
+    private int maximise(Board board, int depth, String marker) {
         int maxScore = -100;
         for (Object move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(marker, (int) move);
-            int score = minimax(newBoard, opponentMarker);
+            int score = minimax(newBoard, depth, opponentMarker);
             if (score > maxScore) {
                 maxScore = score;
             }
@@ -99,11 +91,11 @@ public class UnbeatablePlayer implements PlayerService {
         return maxScore;
     }
 
-    private int minimise(Board board, String marker) {
+    private int minimise(Board board, int depth, String marker) {
         int minScore = 100;
         for (Object move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(marker, (int) move);
-            int score = minimax(newBoard, thisPlayerMarker);
+            int score = minimax(newBoard, depth, thisPlayerMarker);
             if (score < minScore) {
                 minScore = score;
             }

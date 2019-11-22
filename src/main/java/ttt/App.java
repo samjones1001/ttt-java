@@ -22,7 +22,6 @@ class App {
 
         Player player1 = new Player(playerOneName, playerOneMarker, console);
         Player player2 = new Player(playerTwoName, playerTwoMarker, console);
-
         Board board = new Board();
         GameConfig config = new GameConfig(player1, player2, board);
 

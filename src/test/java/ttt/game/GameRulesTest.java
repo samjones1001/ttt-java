@@ -68,4 +68,31 @@ public class GameRulesTest {
 
         assertTrue(rules.isWon(board, "X"));
     }
+
+    @Test
+    public void aGameIsNotOverIfNeitherPlayerHasWonAndtheBoardIsNotFull() {
+        String[] boardState = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        Board board = new Board(boardState);
+        GameRules rules = new GameRules();
+
+        assertFalse(rules.isGameOver(board, "X", "O"));
+    }
+
+    @Test
+    public void aGameIsOverIfTheBoardIsFull() {
+        String[] boardState = new String[] {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
+        Board board = new Board(boardState);
+        GameRules rules = new GameRules();
+
+        assertTrue(rules.isGameOver(board, "X", "O"));
+    }
+
+    @Test
+    public void aGameIsOverIfAPlayerHasWon() {
+        String[] boardState = new String[] {"X", "X", "X", "4", "5", "6", "7", "8", "9"};
+        Board board = new Board(boardState);
+        GameRules rules = new GameRules();
+
+        assertTrue(rules.isGameOver(board, "X", "B"));
+    }
 }
