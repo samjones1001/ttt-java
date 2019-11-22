@@ -41,7 +41,7 @@ public class UnbeatablePlayer implements PlayerService {
         for (Integer move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(thisPlayerMarker, (int) move);
 
-            int score = minimax(newBoard, 4, opponentMarker);
+            int score = minimax(newBoard, 5, -100, 100,  opponentMarker);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
@@ -56,16 +56,16 @@ public class UnbeatablePlayer implements PlayerService {
         this.opponentMarker = game.getOpponent().getMarker();
     }
 
-    private int minimax(Board board, int depth, String nextMarker) {
+    private int minimax(Board board, int depth, int alpha, int beta, String nextMarker) {
         Integer score = getScore(board);
         if (rules.isGameOver(board, thisPlayerMarker, opponentMarker) || depth == 0) {
             return score;
         }
 
         if (nextMarker.equals(thisPlayerMarker)) {
-            return maximise(board,depth-1, nextMarker);
+            return maximise(board,depth-1, alpha, beta, nextMarker);
         } else {
-            return minimise(board,depth-1, nextMarker);
+            return minimise(board,depth-1, alpha, beta, nextMarker);
         }
     }
 
@@ -79,25 +79,37 @@ public class UnbeatablePlayer implements PlayerService {
         }
     }
 
-    private int maximise(Board board, int depth, String marker) {
+    private int maximise(Board board, int depth, int alpha, int beta, String marker) {
         int maxScore = -100;
         for (Object move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(marker, (int) move);
-            int score = minimax(newBoard, depth, opponentMarker);
+            int score = minimax(newBoard, depth, alpha, beta, opponentMarker);
             if (score > maxScore) {
                 maxScore = score;
+            }
+            if (score > alpha) {
+                alpha = score;
+            }
+            if (beta <= alpha) {
+                break;
             }
         }
         return maxScore;
     }
 
-    private int minimise(Board board, int depth, String marker) {
+    private int minimise(Board board, int depth, int alpha, int beta, String marker) {
         int minScore = 100;
         for (Object move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(marker, (int) move);
-            int score = minimax(newBoard, depth, thisPlayerMarker);
+            int score = minimax(newBoard, depth, alpha, beta, thisPlayerMarker);
             if (score < minScore) {
                 minScore = score;
+            }
+            if (score < beta) {
+                beta = score;
+            }
+            if (beta <= alpha) {
+                break;
             }
         }
         return minScore;
