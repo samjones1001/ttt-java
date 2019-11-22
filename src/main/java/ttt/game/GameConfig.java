@@ -1,23 +1,23 @@
 package ttt.game;
 
-import ttt.service.PlayerService;
+import ttt.player.Player;
 
 public class GameConfig {
-    private PlayerService currentPlayer;
-    private PlayerService opponent;
+    private Player currentPlayer;
+    private Player opponent;
     private Board board;
 
-    public GameConfig(PlayerService currentPlayer, PlayerService opponent, Board board) {
+    public GameConfig(Player currentPlayer, Player opponent, Board board) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
     }
 
-    public PlayerService getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public PlayerService getOpponent() {
+    public Player getOpponent() {
         return opponent;
     }
 

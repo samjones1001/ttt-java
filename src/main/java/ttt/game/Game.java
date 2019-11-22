@@ -1,16 +1,14 @@
 package ttt.game;
 
 import ttt.messaging.MessageBuilder;
-import ttt.player.Player;
 import ttt.service.ClientService;
-import ttt.service.PlayerService;
+import ttt.player.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Game {
-    private PlayerService currentPlayer;
-    private PlayerService opponent;
+    private Player currentPlayer;
+    private Player opponent;
     private Board board;
     private ClientService userInterface;
     private GameRules rules;
@@ -24,7 +22,7 @@ public class Game {
     private static final String opponentMoveBaseString = " %s took space %s.";
     private static final int humanReadableIndexModifier = 1;
 
-    public Game(PlayerService currentPlayer, PlayerService opponent, Board board, ClientService userInterface) {
+    public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
@@ -33,11 +31,11 @@ public class Game {
         this.messageBuilder = new MessageBuilder();
     }
 
-    public PlayerService getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public PlayerService getOpponent() {
+    public Player getOpponent() {
         return opponent;
     }
 
@@ -81,7 +79,7 @@ public class Game {
     }
 
     private void switchPlayers() {
-        PlayerService temp = currentPlayer;
+        Player temp = currentPlayer;
         currentPlayer = opponent;
         opponent = temp;
     }

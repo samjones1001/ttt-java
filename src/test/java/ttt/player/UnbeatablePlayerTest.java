@@ -5,7 +5,6 @@ import ttt.console.Console;
 import ttt.game.Board;
 import ttt.game.Game;
 import ttt.mocks.MockConsoleIO;
-import ttt.service.PlayerService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,8 +14,8 @@ public class UnbeatablePlayerTest {
         String[] boardState = new String[]{"O", "O", "O", "O", "O", "O", "O", "O", "9"};
         MockConsoleIO consoleIO = new MockConsoleIO();
         Console console = new Console(consoleIO);
-        PlayerService player = new UnbeatablePlayer("Player 1", "X");
-        PlayerService player2 = new UnbeatablePlayer("Player 2", "O");
+        Player player = new UnbeatablePlayer("Player 1", "X");
+        Player player2 = new UnbeatablePlayer("Player 2", "O");
         Board board = new Board(boardState);
         Game game = new Game(player, player2, board, console);
 
@@ -28,8 +27,8 @@ public class UnbeatablePlayerTest {
         String[] boardState = new String[]{"X", "X", "3", "4", "5", "6", "7", "8", "9"};
         MockConsoleIO consoleIO = new MockConsoleIO();
         Console console = new Console(consoleIO);
-        PlayerService player = new UnbeatablePlayer("Player 1", "X");
-        PlayerService player2 = new UnbeatablePlayer("Player 2", "O");
+        Player player = new UnbeatablePlayer("Player 1", "X");
+        Player player2 = new UnbeatablePlayer("Player 2", "O");
         Board board = new Board(boardState);
         Game game = new Game(player, player2, board, console);
 
@@ -41,8 +40,8 @@ public class UnbeatablePlayerTest {
         String[] boardState = new String[]{"X", "O", "3", "4", "O", "6", "7", "8", "9"};
         MockConsoleIO consoleIO = new MockConsoleIO();
         Console console = new Console(consoleIO);
-        PlayerService player = new UnbeatablePlayer("Player 1", "X");
-        PlayerService player2 = new UnbeatablePlayer("Player 2", "O");
+        Player player = new UnbeatablePlayer("Player 1", "X");
+        Player player2 = new UnbeatablePlayer("Player 2", "O");
         Board board = new Board(boardState);
         Game game = new Game(player, player2, board, console);
 
@@ -54,8 +53,8 @@ public class UnbeatablePlayerTest {
         String[] boardState = new String[]{"X", "X", "3", "4", "5", "6", "O", "O", "9"};
         MockConsoleIO consoleIO = new MockConsoleIO();
         Console console = new Console(consoleIO);
-        PlayerService player = new UnbeatablePlayer("Player 1", "X");
-        PlayerService player2 = new UnbeatablePlayer("Player 2", "O");
+        Player player = new UnbeatablePlayer("Player 1", "X");
+        Player player2 = new UnbeatablePlayer("Player 2", "O");
         Board board = new Board(boardState);
         Game game = new Game(player, player2, board, console);
 

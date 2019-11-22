@@ -3,9 +3,8 @@ package ttt.game;
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.Player;
+import ttt.player.HumanPlayer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,8 +14,8 @@ public class GameTest {
     private Game setupGame(ArrayList<String> gameInputs, String[] boardState) {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(gameInputs);
         Console console = new Console(mockConsoleIO);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         return new Game(player1, player2, new Board(boardState), console);
     }
 
@@ -24,8 +23,8 @@ public class GameTest {
     void startsWithPlayerOnesTurn() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         assertEquals(player1, game.getCurrentPlayer());
@@ -37,8 +36,8 @@ public class GameTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
@@ -52,8 +51,8 @@ public class GameTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
@@ -68,8 +67,8 @@ public class GameTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
 
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
@@ -82,8 +81,8 @@ public class GameTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
@@ -96,8 +95,8 @@ public class GameTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, new Board(), console);
 
         game.playTurn();
@@ -151,8 +150,8 @@ public class GameTest {
 
         String[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
         Board board = new Board(filledBoard);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, board, console);
 
         game.gameOver();
@@ -167,8 +166,8 @@ public class GameTest {
 
         String[] filledBoard = {"O", "O", "O", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(filledBoard);
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, board, console);
 
         game.gameOver();

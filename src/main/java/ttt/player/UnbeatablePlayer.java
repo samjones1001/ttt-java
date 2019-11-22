@@ -3,9 +3,8 @@ package ttt.player;
 import ttt.game.Board;
 import ttt.game.Game;
 import ttt.game.GameRules;
-import ttt.service.PlayerService;
 
-public class UnbeatablePlayer implements PlayerService {
+public class UnbeatablePlayer implements Player {
     private String name;
     private String marker;
     private GameRules rules;

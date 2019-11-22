@@ -5,7 +5,7 @@ import ttt.console.ConsoleIO;
 import ttt.game.Board;
 import ttt.game.GameConfig;
 import ttt.game.GameRunner;
-import ttt.player.Player;
+import ttt.player.HumanPlayer;
 import ttt.service.IOService;
 
 class App {
@@ -20,8 +20,8 @@ class App {
         Console console = new Console(consoleIO);
         GameRunner runner = new GameRunner(console);
 
-        Player player1 = new Player(playerOneName, playerOneMarker, console);
-        Player player2 = new Player(playerTwoName, playerTwoMarker, console);
+        HumanPlayer player1 = new HumanPlayer(playerOneName, playerOneMarker, console);
+        HumanPlayer player2 = new HumanPlayer(playerTwoName, playerTwoMarker, console);
         Board board = new Board();
         GameConfig config = new GameConfig(player1, player2, board);
 
