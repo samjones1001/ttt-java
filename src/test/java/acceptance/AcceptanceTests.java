@@ -6,7 +6,6 @@ import ttt.console.Console;
 import ttt.game.Board;
 import ttt.game.Game;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.Player;
 import ttt.player.UnbeatablePlayer;
 import ttt.service.ClientService;
 import ttt.service.PlayerService;
@@ -116,6 +115,6 @@ public class AcceptanceTests {
         playerOne.getMove(game);
         long endTime = System.currentTimeMillis();
 
-        assertTrue((endTime - startTime) < 1000000);
+        assertTrue((endTime - startTime) < 1000);
     }
 }

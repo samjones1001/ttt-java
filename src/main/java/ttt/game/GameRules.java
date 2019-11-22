@@ -7,11 +7,12 @@ public class GameRules {
         return board.isFull();
     }
 
-    public Boolean isWon(Board board) {
+    public Boolean isWon(Board board, String marker) {
         Object[] boardState = board.getSpaces();
         for (Integer[] condition : winConditions) {
             if (boardState[condition[0]] == boardState[condition[1]] &&
-                boardState[condition[1]] == boardState[condition[2]]) {
+                boardState[condition[1]] == boardState[condition[2]] &&
+                boardState[condition[1]] == marker) {
                 return true;
             }
         }

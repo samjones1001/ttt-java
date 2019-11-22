@@ -12,7 +12,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
-    private Game setupGame(ArrayList<String> gameInputs, Object[] boardState) {
+    private Game setupGame(ArrayList<String> gameInputs, String[] boardState) {
         MockConsoleIO mockConsoleIO = new MockConsoleIO(gameInputs);
         Console console = new Console(mockConsoleIO);
         Player player1 = new Player("Player 1", "X", console);
@@ -109,7 +109,7 @@ public class GameTest {
     @Test
     void addsAMarkerToTheBoard() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
-        Object[] boardState = new Object[]{1,2,3,4,5,6,7,8,9};
+        String[] boardState = new String[]{"1","2","3","4","5","6","7","8","9"};
         Game game = setupGame(inputs, boardState);
 
         game.playTurn();
@@ -120,7 +120,7 @@ public class GameTest {
     @Test
     void theGameIsNotOverWhenTheBoardStillHasFreeSpaces() {
         ArrayList<String> inputs = new ArrayList<>();
-        Object[] partiallyFilledBoard = {1, "X", 3, 4, "O", 6, 7, "X", "O"};
+        String[] partiallyFilledBoard = {"1", "X", "3", "4", "O", "6", "7", "X", "O"};
         Game game = setupGame(inputs, partiallyFilledBoard);
 
         assertFalse(game.gameOver());
@@ -129,7 +129,7 @@ public class GameTest {
     @Test
     void theGameIsOverWhenTheBoardHasNoFreeSpaces() {
         ArrayList<String> inputs = new ArrayList<>();
-        Object[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
+        String[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
         Game game = setupGame(inputs, filledBoard);
 
         assertTrue(game.gameOver());
@@ -138,7 +138,7 @@ public class GameTest {
     @Test
     void theGameIsOverWhenTheGameHasBeenWon() {
         ArrayList<String> inputs = new ArrayList<>();
-        Object[] wonBoard = {"X", "X", "X", 4, 5, 6, 7, 8, 9};
+        String[] wonBoard = {"O", "O", "O", "4", "5", "6", "7", "8", "9"};
         Game game = setupGame(inputs, wonBoard);
 
         assertTrue(game.gameOver());
@@ -149,7 +149,7 @@ public class GameTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
 
-        Object[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
+        String[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
         Board board = new Board(filledBoard);
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
@@ -165,7 +165,7 @@ public class GameTest {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
 
-        Object[] filledBoard = {"X", "X", "X", 4, 5, 6, 7, 8, 9};
+        String[] filledBoard = {"O", "O", "O", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(filledBoard);
         Player player1 = new Player("Player 1", "X", console);
         Player player2 = new Player("Player 2", "O", console);
