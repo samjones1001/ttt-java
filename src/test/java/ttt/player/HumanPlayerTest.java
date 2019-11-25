@@ -11,12 +11,12 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PlayerTest {
+public class HumanPlayerTest {
     public Game setupGame(ArrayList<String> inputs) {
         MockConsoleIO consoleIO = new MockConsoleIO(inputs);
         Console console = new Console(consoleIO);
-        Player player = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Board board = new Board();
         return new Game(player, player2, board, console);
     }
@@ -26,8 +26,8 @@ public class PlayerTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));
         MockConsoleIO consoleIO = new MockConsoleIO(inputs);
         Console console = new Console(consoleIO);
-        Player player = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Board board = new Board();
         Game game = new Game(player, player2, board, console);
 

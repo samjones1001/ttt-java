@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class MockConsoleIO implements IOService {
     public String lastOutput;
+    public int outputCallCount = 0;
     public int inputCallCount = 0;
     public int clearCallCount = 0;
     private ArrayList<String> inputs;
@@ -20,6 +21,7 @@ public class MockConsoleIO implements IOService {
 
     @Override
     public void output(String message) {
+        outputCallCount += 1;
         lastOutput = message;
     }
 

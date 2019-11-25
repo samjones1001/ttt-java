@@ -1,33 +1,45 @@
 package ttt.game;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Board {
-    private Object[] spaces;
+    private String[] spaces;
 
     public Board() {
-        spaces = new Object[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        spaces = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
     }
 
-    public Board(Object[] state) {
+    public Board(String[] state) {
         spaces = state;
     }
 
-    public Object[] getSpaces() {
+    public String[] getSpaces() {
         return spaces;
     }
 
-    public Object[] availableSpaces() {
-        return Arrays.stream(spaces).filter(space -> space instanceof Integer).toArray();
+    public ArrayList<Integer> availableSpaces() {
+        ArrayList<Integer> availableSpaces = new ArrayList<>();
+        int index = 0;
+
+        for(String space : spaces) {
+            try {
+                Integer.parseInt(space);
+                availableSpaces.add(index);
+            } catch (NumberFormatException err) {}
+
+            index++;
+        }
+        return availableSpaces;
     }
 
     public Board occupySpace(String symbol, Integer space) {
-        spaces[space] = symbol;
-        return new Board(spaces);
+        String[] state = spaces.clone();
+        state[space] = symbol;
+        return new Board(state);
     }
 
     public Boolean isFull() {
-        return availableSpaces().length == 0;
+        return availableSpaces().size() == 0;
     }
 }
 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Console implements ClientService {
     private IOService consoleIO;
 
-    private static final String boardSplitter = "\n--------------\n";
+    private static final String boardSplitter = "\n-----------\n";
     private static final String rowSplitter = " | ";
     private static final String rowPadder = " ";
 
@@ -39,6 +39,11 @@ public class Console implements ClientService {
             return getAndValidateInput(validInputs, errorMessage);
         }
         return input;
+    }
+
+    @Override
+    public void clear() {
+        consoleIO.clear();
     }
 
     private String buildBoardOutput(Object[] boardState) {

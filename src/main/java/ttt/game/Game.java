@@ -1,10 +1,10 @@
 package ttt.game;
 
 import ttt.messaging.MessageBuilder;
-import ttt.player.Player;
 import ttt.service.ClientService;
+import ttt.player.Player;
 
-import java.util.Formatter;
+import java.util.ArrayList;
 
 public class Game {
     private Player currentPlayer;
@@ -20,6 +20,7 @@ public class Game {
     private static final String winningPlayerBaseString = "%s Won!";
     private static final String turnStartBaseString = "%s's turn.";
     private static final String opponentMoveBaseString = " %s took space %s.";
+    private static final int humanReadableIndexModifier = 1;
 
     public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
         this.currentPlayer = currentPlayer;
@@ -42,16 +43,18 @@ public class Game {
         return board;
     }
 
+    public GameRules getRules() { return rules; }
+
     public Object[] boardState() {
         return board.getSpaces();
     }
 
     public String[] availableSpaces() {
-        Object[] availableSpaces = board.availableSpaces();
-        String[] spaceStrings = new String[availableSpaces.length];
+        ArrayList<Integer> availableSpaceIndexes = board.availableSpaces();
+        String[] spaceStrings = new String[availableSpaceIndexes.size()];
 
-        for (int index = 0; index < availableSpaces.length; index++ ) {
-            spaceStrings[index] = (String.valueOf(availableSpaces[index]));
+        for (int index = 0; index < availableSpaceIndexes.size(); index++ ) {
+            spaceStrings[index] = (String.valueOf(availableSpaceIndexes.get(index) + humanReadableIndexModifier));
         }
 
         return spaceStrings;
@@ -63,12 +66,12 @@ public class Game {
 
         int space = currentPlayer.getMove(this);
         board = board.occupySpace(currentPlayer.getMarker(), space);
-        previousMove = Integer.toString(space + 1);
+        previousMove = Integer.toString(space + humanReadableIndexModifier);
         switchPlayers();
     }
 
     public Boolean gameOver() {
-        if (rules.isTied(board) || rules.isWon(board)) {
+        if (rules.isGameOver(board, currentPlayer.getMarker(), opponent.getMarker())) {
             gameOverScreen();
             return true;
         }

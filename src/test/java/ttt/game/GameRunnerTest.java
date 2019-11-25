@@ -3,7 +3,7 @@ package ttt.game;
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.Player;
+import ttt.player.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +17,9 @@ public class GameRunnerTest {
         Console console = new Console(mockConsoleIO);
         GameRunner runner = new GameRunner(console);
 
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
-        Board board = new Board(new Object[] {'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'O'});
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
+        Board board = new Board(new String[] {"X", "X", "X", "X", "O", "X", "X", "X", "O"});
         GameConfig config = new GameConfig(player1, player2, board);
 
         runner.run(config);
@@ -37,8 +37,8 @@ public class GameRunnerTest {
         Console console = new Console(mockConsoleIO);
         GameRunner runner = new GameRunner(console);
 
-        Player player1 = new Player("Player 1", "X", console);
-        Player player2 = new Player("Player 2", "O", console);
+        HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
+        HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Board board = new Board();
         GameConfig config = new GameConfig(player1, player2, board);
 
