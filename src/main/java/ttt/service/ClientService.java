@@ -6,4 +6,6 @@ public interface ClientService {
     void displayOutput(String message);
 
     String getAndValidateInput(String[] validInputs, String errorMessage);
+
+    void clear();
 }

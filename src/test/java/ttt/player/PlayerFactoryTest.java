@@ -10,9 +10,8 @@ public class PlayerFactoryTest {
     @Test
     void returnsNullIfPassedAnInvalidPlayerType() {
         Console console = new Console();
-        PlayerFactory factory = new PlayerFactory();
 
-        Player player = factory.create("invalidType", "player 1", "x", console);
+        Player player = PlayerFactory.create("invalidType", "player 1", "x", console);
 
         assertNull(player);
     }
@@ -20,11 +19,9 @@ public class PlayerFactoryTest {
     @Test
     void returnsAPlayerIfPassedAValidPlayerType() {
         Console console = new Console();
-        PlayerFactory factory = new PlayerFactory();
 
-        Player player = factory.create("humanPlayer", "player 1", "x", console);
-        Player player2 = factory.create("unbeatablePlayer", "player 1", "x", console);
-
+        Player player = PlayerFactory.create("humanPlayer", "player 1", "x", console);
+        Player player2 = PlayerFactory.create("unbeatablePlayer", "player 1", "x", console);
 
         assertNotNull(player);
         assertNotNull(player2);
