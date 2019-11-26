@@ -25,7 +25,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
+        var inputs = new String[] {"1", "1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -36,6 +36,7 @@ class AcceptanceTests {
         String currentLine;
 
         while ((currentLine = input.readLine()) != null) {
+            System.out.println(currentLine);
             lastLine = currentLine;
         }
 
@@ -54,7 +55,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"-1", "0", "10000", "Not Valid", "1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
+        var inputs = new String[] {"1", "1", "1", "-1", "0", "10000", "Not Valid", "1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -83,7 +84,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"1", "1", "1", "2", "3", "4", "5", "6", "7"};
+        var inputs = new String[] {"1", "1", "1", "1", "2", "3", "4", "5", "6", "7"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();

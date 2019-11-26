@@ -15,6 +15,7 @@ public class Menu {
 
     private final static String welcomeMessage = "Welcome to Tic-Tac-Toe!";
     private final static String playerSelectionMessage = "Select a type for %s\n\n1) Human Player\n2) Unbeatable Computer Player";
+    private final static String boardSizeMessage = "What size board would you like to play on?\n\n1) 3x3\n2) 4x4";
 
     private static final String playerOneName = "Player 1";
     private static final String playerOneMarker = "X";
@@ -23,7 +24,7 @@ public class Menu {
 
     private static final String menuSelectionErrorMessage = "Please select an option from the menu";
 
-    private static final String[] playerSelectionInputs = new String[]{"1", "2"};
+    private static final String[] menuInputs = new String[]{"1", "2"};
     private final static Map<String, String> playerTypes = new HashMap<>() {
         {
             put("1", "humanPlayer");
@@ -42,17 +43,26 @@ public class Menu {
         Player playerOne = selectPlayerType(playerOneName, playerOneMarker);
         userInterface.clear();
         Player playerTwo = selectPlayerType(playerTwoName, playerTwoMarker);
+        int boardSize = selectBoardSize();
 
-        return new GameConfig(playerOne, playerTwo, new Board());
+        return new GameConfig(playerOne, playerTwo, new Board(boardSize));
     }
 
     private Player selectPlayerType(String name, String marker) {
         userInterface.displayOutput(MessageBuilder.buildMessage(playerSelectionMessage, name));
-        String userInput = userInterface.getAndValidateInput(playerSelectionInputs, menuSelectionErrorMessage);
+        String userInput = userInterface.getAndValidateInput(menuInputs, menuSelectionErrorMessage);
         return createPlayer(playerTypes.get(userInput),name, marker, userInterface);
     }
 
     private Player createPlayer(String type, String name, String marker, ClientService console) {
         return PlayerFactory.create(type, name, marker, console);
+    }
+
+    private int selectBoardSize() {
+        userInterface.clear();
+        userInterface.displayOutput(boardSizeMessage);
+        String userInput = userInterface.getAndValidateInput(menuInputs, menuSelectionErrorMessage);
+
+        return userInput.equals("1") ? 3 : 4;
     }
 }
