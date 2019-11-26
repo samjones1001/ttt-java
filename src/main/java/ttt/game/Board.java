@@ -2,14 +2,24 @@ package ttt.game;
 
 import java.util.ArrayList;
 
+import static java.lang.Character.isDigit;
+
 public class Board {
     private String[] spaces;
+    private int size;
 
     public Board() {
-        spaces = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        this.size = 3;
+        spaces = generateState();
     }
 
-    public Board(String[] state) {
+    public Board(int size) {
+        this.size = size;
+        spaces = generateState();
+    }
+
+    public Board(int size, String[] state) {
+        this.size = size;
         spaces = state;
     }
 
@@ -22,11 +32,9 @@ public class Board {
         int index = 0;
 
         for(String space : spaces) {
-            try {
-                Integer.parseInt(space);
+            if (isDigit(space.charAt(0))) {
                 availableSpaces.add(index);
-            } catch (NumberFormatException err) {}
-
+            }
             index++;
         }
         return availableSpaces;
@@ -35,11 +43,22 @@ public class Board {
     public Board occupySpace(String symbol, Integer space) {
         String[] state = spaces.clone();
         state[space] = symbol;
-        return new Board(state);
+        return new Board(size, state);
     }
 
     public Boolean isFull() {
         return availableSpaces().size() == 0;
+    }
+
+    private String[] generateState() {
+        spaces = new String[size*size];
+        int spaceIndex = 1;
+
+        for(int i = 0; i < spaces.length; i++) {
+            spaces[i] = Integer.toString(spaceIndex);
+            spaceIndex += 1;
+        }
+        return spaces;
     }
 }
 

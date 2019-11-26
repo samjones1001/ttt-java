@@ -4,11 +4,14 @@ import ttt.service.IOService;
 import ttt.service.ClientService;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.StrictMath.sqrt;
 
 public class Console implements ClientService {
     private IOService consoleIO;
 
-    private static final String boardSplitter = "\n-----------\n";
     private static final String rowSplitter = " | ";
     private static final String rowPadder = " ";
 
@@ -47,22 +50,47 @@ public class Console implements ClientService {
     }
 
     private String buildBoardOutput(Object[] boardState) {
-        return String.join(boardSplitter, buildRowStrings(boardState));
+        return String.join(buildBoardSplitter(boardState), buildRowStrings(boardState));
+    }
+
+    private String buildBoardSplitter(Object[] boardState) {
+        String boardSplitterCharacter = "-";
+        int rowSize = (int) sqrt(boardState.length);
+        int numOfSplitterCharsRequired = (rowSize * 4) + 3;
+        String boardSplitter =  IntStream.range(0, numOfSplitterCharsRequired).mapToObj(i -> boardSplitterCharacter).collect(Collectors.joining(""));
+        return "\n" + boardSplitter + "\n";
     }
 
     private String[] buildRowStrings(Object[] boardState) {
         Object[][] rows = splitToRows(boardState);
-        return new String[] {buildRowString(rows[0]), buildRowString(rows[1]), buildRowString(rows[2])};
+        String[] rowStrings = new String[rows.length];
+
+        for (int index = 0; index < rowStrings.length; index++) {
+            rowStrings[index] = buildRowString(rows[index]);
+        }
+        return rowStrings;
     }
 
     private Object[][] splitToRows(Object[] boardState) {
-        return new Object[][] {Arrays.copyOfRange(boardState, 0, 3),
-                               Arrays.copyOfRange(boardState, 3, 6),
-                               Arrays.copyOfRange(boardState, 6, 9)};
+        int numOfRows = (int) sqrt(boardState.length);
+        Object[][] rows = new Object[numOfRows][numOfRows];
+        int count = 0;
+        for (Object[] row : rows) {
+            for (int cellIndex = 0; cellIndex < numOfRows; cellIndex++) {
+                row[cellIndex] = boardState[count];
+                count++;
+            }
+        }
+        return rows;
     }
 
     private String buildRowString(Object[] rowArray) {
         String[] rowStringArray = Arrays.stream(rowArray).map(Object::toString).toArray(String[]::new);
+        for (int index = 0; index < rowStringArray.length; index++) {
+            if (rowStringArray[index].length() == 1) {
+                rowStringArray[index] += " ";
+            }
+        }
         return padRow(String.join(rowSplitter, rowStringArray));
     }
 

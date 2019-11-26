@@ -13,7 +13,7 @@ import java.util.Map;
 public class Menu {
     private ClientService userInterface;
 
-    private final static String welcomeMessage = "Welcome to Tice-Tac-Toe!";
+    private final static String welcomeMessage = "Welcome to Tic-Tac-Toe!";
     private final static String playerSelectionMessage = "Select a type for %s\n\n1) Human Player\n2) Unbeatable Computer Player";
 
     private static final String playerOneName = "Player 1";
@@ -21,7 +21,7 @@ public class Menu {
     private static final String playerTwoName = "Player 2";
     private static final String playerTwoMarker = "O";
 
-    private static final String menuSelectionErrorMessage = "Plase select an option from the menu";
+    private static final String menuSelectionErrorMessage = "Please select an option from the menu";
 
     private static final String[] playerSelectionInputs = new String[]{"1", "2"};
     private final static Map<String, String> playerTypes = new HashMap<>() {

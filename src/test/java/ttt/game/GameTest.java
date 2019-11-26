@@ -16,7 +16,7 @@ public class GameTest {
         Console console = new Console(mockConsoleIO);
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        return new Game(player1, player2, new Board(boardState), console);
+        return new Game(player1, player2, new Board(3,boardState), console);
     }
 
     @Test
@@ -149,7 +149,7 @@ public class GameTest {
         Console console = new Console(mockConsoleIO);
 
         String[] filledBoard = {"X", "X", "X", "X", "O", "X", "X", "X", "O"};
-        Board board = new Board(filledBoard);
+        Board board = new Board(3, filledBoard);
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, board, console);
@@ -165,7 +165,7 @@ public class GameTest {
         Console console = new Console(mockConsoleIO);
 
         String[] filledBoard = {"O", "O", "O", "4", "5", "6", "7", "8", "9"};
-        Board board = new Board(filledBoard);
+        Board board = new Board(3, filledBoard);
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
         Game game = new Game(player1, player2, board, console);

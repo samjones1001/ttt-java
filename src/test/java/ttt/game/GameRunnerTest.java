@@ -19,7 +19,7 @@ public class GameRunnerTest {
 
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board(new String[] {"X", "X", "X", "X", "O", "X", "X", "X", "O"});
+        Board board = new Board(3, new String[] {"X", "X", "X", "X", "O", "X", "X", "X", "O"});
         GameConfig config = new GameConfig(player1, player2, board);
 
         runner.run(config);

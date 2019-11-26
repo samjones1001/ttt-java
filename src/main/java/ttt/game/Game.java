@@ -13,7 +13,6 @@ public class Game {
     private ClientService userInterface;
     private GameRules rules;
     private String previousMove;
-    private MessageBuilder messageBuilder;
 
     private static final String gameOverBaseString = "Game Over - ";
     private static final String tieString = "It's a Tie!";
@@ -28,7 +27,6 @@ public class Game {
         this.board = board;
         this.userInterface = userInterface;
         this.rules = new GameRules();
-        this.messageBuilder = new MessageBuilder();
     }
 
     public Player getCurrentPlayer() {
@@ -93,14 +91,14 @@ public class Game {
     }
 
     private String winningPlayerMessage() {
-        return messageBuilder.buildMessage(winningPlayerBaseString, opponent.getName());
+        return MessageBuilder.buildMessage(winningPlayerBaseString, opponent.getName());
     }
 
     private String turnStartMessage() {
-        String message = messageBuilder.buildMessage(turnStartBaseString, currentPlayer.getName());
+        String message = MessageBuilder.buildMessage(turnStartBaseString, currentPlayer.getName());
         if (previousMove != null) {
             message +=  opponentMoveBaseString;
-            return messageBuilder.buildMessage(message, opponent.getName(), previousMove);
+            return MessageBuilder.buildMessage(message, opponent.getName(), previousMove);
         }
         return message;
     }
