@@ -27,8 +27,15 @@ public class Menu {
     private static final String[] menuInputs = new String[]{"1", "2"};
     private final static Map<String, String> playerTypes = new HashMap<>() {
         {
-            put("1", "humanPlayer");
-            put("2", "unbeatablePlayer");
+            put("1", PlayerFactory.humanPlayerString);
+            put("2", PlayerFactory.unbeatablePlayerString);
+        }
+    };
+
+    private final static Map<String, Integer> boardSizes = new HashMap<>() {
+        {
+            put("1", 3);
+            put("2", 4);
         }
     };
 
@@ -63,6 +70,6 @@ public class Menu {
         userInterface.displayOutput(boardSizeMessage);
         String userInput = userInterface.getAndValidateInput(menuInputs, menuSelectionErrorMessage);
 
-        return userInput.equals("1") ? 3 : 4;
+        return boardSizes.get(userInput);
     }
 }

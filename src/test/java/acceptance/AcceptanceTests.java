@@ -36,7 +36,6 @@ class AcceptanceTests {
         String currentLine;
 
         while ((currentLine = input.readLine()) != null) {
-            System.out.println(currentLine);
             lastLine = currentLine;
         }
 
