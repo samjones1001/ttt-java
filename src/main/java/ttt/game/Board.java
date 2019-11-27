@@ -1,6 +1,9 @@
 package ttt.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.lang.Character.isDigit;
 
@@ -10,12 +13,12 @@ public class Board {
 
     public Board() {
         this.size = 3;
-        spaces = generateState();
+        spaces = generateInitialState();
     }
 
     public Board(int size) {
         this.size = size;
-        spaces = generateState();
+        spaces = generateInitialState();
     }
 
     public Board(int size, String[] state) {
@@ -28,16 +31,9 @@ public class Board {
     }
 
     public ArrayList<Integer> availableSpaces() {
-        ArrayList<Integer> availableSpaces = new ArrayList<>();
-        int index = 0;
-
-        for(String space : spaces) {
-            if (isDigit(space.charAt(0))) {
-                availableSpaces.add(index);
-            }
-            index++;
-        }
-        return availableSpaces;
+        return Arrays.stream(spaces).filter(space -> isDigit(space.charAt(0)))
+                .map(space -> Integer.parseInt(space) - 1)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public Board occupySpace(String symbol, Integer space) {
@@ -50,16 +46,8 @@ public class Board {
         return availableSpaces().size() == 0;
     }
 
-    private String[] generateState() {
+    private String[] generateInitialState() {
         spaces = new String[size*size];
-        int spaceIndex = 1;
-
-        for(int i = 0; i < spaces.length; i++) {
-            spaces[i] = Integer.toString(spaceIndex);
-            spaceIndex += 1;
-        }
-        return spaces;
+        return IntStream.range(1, spaces.length+1).mapToObj(Integer::toString).toArray(String[]::new);
     }
 }
-
-
