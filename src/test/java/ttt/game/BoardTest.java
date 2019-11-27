@@ -50,4 +50,25 @@ class BoardTest {
 
         assertTrue(board.isFull());
     }
+
+    @Test void returnsTheIndicesOfEachRowOnTheBoard() {
+        int[][] expectedOutput = new int[][]{{0,1,2}, {3,4,5}, {6,7,8}};
+        Board board = new Board(3);
+
+        assertArrayEquals(expectedOutput, board.rows());
+    }
+
+    @Test void returnsTheIndicesOfEachColumnOnTheBoard() {
+        int[][] expectedOutput = new int[][]{{0,3,6}, {1,4,7}, {2,5,8}};
+        Board board = new Board(3);
+
+        assertArrayEquals(expectedOutput, board.columns());
+    }
+
+    @Test void returnsTheIndicesOfEachDiagonalOnTheBoard() {
+        int[][] expectedOutput = new int[][]{{0,4,8}, {2,4,6}};
+        Board board = new Board(3);
+
+        assertArrayEquals(expectedOutput, board.diagonals());
+    }
 }
