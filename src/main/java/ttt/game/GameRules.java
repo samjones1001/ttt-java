@@ -1,6 +1,7 @@
 package ttt.game;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import static java.lang.StrictMath.sqrt;
 
@@ -24,12 +25,11 @@ public class GameRules {
 
     public boolean isWon(Board board, String marker) {
         Object[] boardState = board.getSpaces();
-        for (int[] condition : winConditions(board)) {
-            if (isWinningLine(condition, boardState) && boardState[condition[0]] == marker) {
-                return true;
-            }
-        }
-        return false;
+        int[][] winningLines = Arrays.stream(winConditions(board))
+                .filter(line -> isWinningLine(line, boardState) && boardState[line[0]] == marker)
+                .toArray(int[][]::new);
+
+        return winningLines.length > 0;
     }
 
     public boolean isGameOver(Board board, String currentPlayerMarker, String opponentMarker) {
@@ -37,46 +37,34 @@ public class GameRules {
     }
 
     private boolean isWinningLine(int[] line, Object[] boardState) {
-        boolean flag = true;
-        Object first = boardState[line[0]];
+        Object firstCell = boardState[line[0]];
+        Integer[] divergentCells = Arrays.stream(line)
+                .filter(cell -> boardState[cell] != firstCell).boxed()
+                .toArray(Integer[]::new);
 
-        for (int index = 1; index < line.length; index++) {
-            if (boardState[line[index]] != first) flag = false;
-        }
-        return flag;
+        return divergentCells.length == 0;
     }
 
     private int[] allIndices(Board board) {
-        int[] indices = new int[board.getSpaces().length];
-
-        for(int index = 0; index < board.getSpaces().length; index++) {
-            indices[index] = index;
-        }
-        return indices;
+        return IntStream.range(0, board.getSpaces().length).toArray();
     }
 
     private int[][] winningRowIndices(Board board) {
         int rowSize = (int) sqrt(board.getSpaces().length);
-        int[][] rowIndices = new int[rowSize][rowSize];
         int[] allIndices = allIndices(board);
 
-        for (int i = 0; i < rowSize; i++) {
-            rowIndices[i] = Arrays.copyOfRange(allIndices, i * rowSize, i * rowSize + rowSize);
-        }
-        return rowIndices;
+        return  IntStream.range(0, rowSize)
+                .mapToObj(i -> Arrays.copyOfRange(allIndices, i * rowSize, i * rowSize + rowSize))
+                .toArray(int[][]::new);
     }
 
     private int[][] winningColumnIndices(Board board) {
         int columnSize = (int) sqrt(board.getSpaces().length);
-        int[][] columnIndices = new int[columnSize][columnSize];
-        int[][] rowIndices = winningRowIndices(board);
-
-        for (int columnNumber = 0; columnNumber < columnSize; columnNumber++) {
-            for (int index = 0; index < columnSize; index ++) {
-                columnIndices[columnNumber][index] = rowIndices[index][columnNumber];
-            }
-        }
-        return columnIndices;
+        return IntStream.range(0, columnSize)
+                .mapToObj(columnNumber -> IntStream.range(0, columnSize)
+                        .map(cell -> (cell * columnSize) + columnNumber)
+                        .toArray())
+                .toArray(int[][]::new);
     }
 
     private int[][] winningDiagonalIndices(Board board) {
@@ -90,24 +78,12 @@ public class GameRules {
 
     private int[] leftToRightDiagonalIndices(Board board) {
         int diagonalSize = (int) sqrt(board.getSpaces().length);
-        int[] diagonalIndices = new int[diagonalSize];
-        int[][] rowIndices = winningRowIndices(board);
-
-        for (int index = 0; index < diagonalSize; index++) {
-            diagonalIndices[index] = rowIndices[index][index];
-        }
-        return diagonalIndices;
+        return IntStream.range(0, diagonalSize).map(cell -> cell * (diagonalSize + 1)).toArray();
     }
 
     private int[] rightToLeftDiagonalIndices(Board board) {
         int diagonalSize = (int) sqrt(board.getSpaces().length);
-        int[] diagonalIndices = new int[diagonalSize];
-        int[][] rowIndices = winningRowIndices(board);
-
-        for (int index = diagonalSize - 1; index >= 0; index--) {
-            diagonalIndices[diagonalSize - (index + 1)] = rowIndices[diagonalSize - (index + 1)][index];
-        }
-        return diagonalIndices;
+        return IntStream.range(1, diagonalSize + 1).map(cell -> (cell * diagonalSize) - cell).toArray();
     }
 }
 
