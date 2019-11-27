@@ -17,7 +17,7 @@ public class HumanPlayerTest {
         Console console = new Console(consoleIO);
         HumanPlayer player = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board();
+        Board board = new Board(3);
         return new Game(player, player2, board, console);
     }
 
@@ -28,7 +28,7 @@ public class HumanPlayerTest {
         Console console = new Console(consoleIO);
         HumanPlayer player = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board();
+        Board board = new Board(3);
         Game game = new Game(player, player2, board, console);
 
         player.getMove(game);

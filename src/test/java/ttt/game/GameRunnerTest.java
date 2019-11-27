@@ -39,7 +39,7 @@ public class GameRunnerTest {
 
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board();
+        Board board = new Board(3);
         GameConfig config = new GameConfig(player1, player2, board);
 
         runner.run(config);

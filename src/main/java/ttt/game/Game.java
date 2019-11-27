@@ -26,7 +26,7 @@ public class Game {
         this.opponent = opponent;
         this.board = board;
         this.userInterface = userInterface;
-        this.rules = new GameRules();
+        this.rules = new GameRules(board);
     }
 
     public Player getCurrentPlayer() {

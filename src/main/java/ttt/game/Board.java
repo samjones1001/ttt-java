@@ -11,11 +11,6 @@ public class Board {
     private String[] spaces;
     private int size;
 
-    public Board() {
-        this.size = 3;
-        spaces = generateInitialState();
-    }
-
     public Board(int size) {
         this.size = size;
         spaces = generateInitialState();
@@ -51,7 +46,7 @@ public class Board {
     }
 
     public int[][] diagonals() {
-        int[][] diagonalIndices = new int[2][size];
+        int[][] diagonalIndices = new int[2][];
 
         diagonalIndices[0] = leftToRightDiagonalIndices();
         diagonalIndices[1] = rightToLeftDiagonalIndices();

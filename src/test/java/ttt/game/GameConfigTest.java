@@ -11,7 +11,7 @@ public class GameConfigTest {
     void createsAConfigObjectWithThePassedOptions() {
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", new Console());
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", new Console());
-        Board board = new Board();
+        Board board = new Board(3);
 
         GameConfig config = new GameConfig(player1, player2, board);
 

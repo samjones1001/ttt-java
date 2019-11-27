@@ -138,7 +138,7 @@ class AcceptanceTests {
         ClientService console = new Console(mockConsoleIO);
         Player playerOne = new UnbeatablePlayer("Player 1", "X");
         Player playerTwo = new UnbeatablePlayer("Player 2", "O");
-        Game game = new Game(playerOne, playerTwo, new Board(), console);
+        Game game = new Game(playerOne, playerTwo, new Board(3), console);
 
         long startTime = System.currentTimeMillis();
         playerOne.getMove(game);
@@ -153,7 +153,7 @@ class AcceptanceTests {
         ClientService console = new Console(mockConsoleIO);
         Player playerOne = new UnbeatablePlayer("Player 1", "X");
         Player playerTwo = new UnbeatablePlayer("Player 2", "O");
-        Game game = new Game(playerOne, playerTwo, new Board(), console);
+        Game game = new Game(playerOne, playerTwo, new Board(3), console);
 
         long startTime = System.currentTimeMillis();
         playerOne.getMove(game);

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
     @Test void boardBeginsWithNineEmptySpacesByDefault() {
-        Board board = new Board();
+        Board board = new Board(3);
 
         assertEquals(9, board.availableSpaces().size());
     }
@@ -18,21 +18,21 @@ class BoardTest {
     }
 
     @Test void canOccupyASpace() {
-        Board board = new Board();
+        Board board = new Board(3);
         Board newBoard = board.occupySpace("X", 0);
 
         assertEquals(8, newBoard.availableSpaces().size());
     }
 
     @Test void occupiedSpacesAreRemainOccupied() {
-        Board board = new Board();
+        Board board = new Board(3);
         Board newBoard = board.occupySpace("X", 0);
 
         assertEquals("X", newBoard.getSpaces()[0]);
     }
 
     @Test void boardIsNotFullWhenNoSpacesAreOccupied() {
-        Board board = new Board();
+        Board board = new Board(3);
 
         assertFalse(board.isFull());
     }

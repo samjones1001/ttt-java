@@ -2,34 +2,32 @@ package ttt.game;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameRulesTest {
     @Test
     void generatesCorrectWinConditionsForA3x3Board() {
         int[][] expectedWinConditions = new int[][] {{0,1,2}, {3,4,5}, {6,7,8}, {0,3,6}, {1,4,7}, {2,5,8}, {0,4,8}, {2,4,6}};
-        Board board = new Board();
-        GameRules rules = new GameRules();
+        Board board = new Board(3);
+        GameRules rules = new GameRules(board);
 
-        assertArrayEquals(expectedWinConditions, rules.winConditions(board));
+        assertArrayEquals(expectedWinConditions, rules.winConditions);
     }
 
     @Test
     void generatesCorrectWinConditionsForA4x4Board() {
         int[][] expectedWinConditions = new int[][] {{0,1,2,3}, {4,5,6,7}, {8,9,10,11}, {12,13,14,15}, {0,4,8,12}, {1,5,9,13}, {2,6,10,14}, {3,7,11,15}, {0,5,10,15}, {3,6,9,12}};
         Board board = new Board(4);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
-        assertArrayEquals(expectedWinConditions, rules.winConditions(board));
+        assertArrayEquals(expectedWinConditions, rules.winConditions);
     }
 
     @Test
     void aGameIsNotTiedIfSpacesRemainAvailable() {
         String[] boardState = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertFalse(rules.isTied(board));
     }
@@ -38,7 +36,7 @@ public class GameRulesTest {
     void aGameIsTiedIfNoSpacesRemainAvailable() {
         String[] boardState = new String[] {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isTied(board));
     }
@@ -47,7 +45,7 @@ public class GameRulesTest {
     void aLineDoesNotWinIfNoSpacesAreOccupied() {
         String[] boardState = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertFalse(rules.isWon(board, "X"));
     }
@@ -56,7 +54,7 @@ public class GameRulesTest {
     void aLineDoesNotWinIfNotAllSpacesContainTheSameMarker() {
         String[] boardState = new String[] {"X", "X", "O", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertFalse(rules.isWon(board, "X"));
     }
@@ -65,7 +63,7 @@ public class GameRulesTest {
     void aLineWinsIfAllSpacesContainTheSameMarker() {
         String[] boardState = new String[] {"X", "X", "X", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isWon(board, "X"));
     }
@@ -74,7 +72,7 @@ public class GameRulesTest {
     void aVerticalLineCanWin() {
         String[] boardState = new String[] {"X", "2", "3", "X", "5", "6", "X", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isWon(board, "X"));
     }
@@ -83,7 +81,7 @@ public class GameRulesTest {
     void aDiagonalLineCanWin() {
         String[] boardState = new String[] {"X", "2", "3", "4", "X", "6", "7", "8", "X"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isWon(board, "X"));
     }
@@ -92,7 +90,7 @@ public class GameRulesTest {
     void aGameIsNotOverIfNeitherPlayerHasWonAndtheBoardIsNotFull() {
         String[] boardState = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertFalse(rules.isGameOver(board, "X", "O"));
     }
@@ -101,7 +99,7 @@ public class GameRulesTest {
     void aGameIsOverIfTheBoardIsFull() {
         String[] boardState = new String[] {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isGameOver(board, "X", "O"));
     }
@@ -110,7 +108,7 @@ public class GameRulesTest {
     void aGameIsOverIfAPlayerHasWon() {
         String[] boardState = new String[] {"X", "X", "X", "4", "5", "6", "7", "8", "9"};
         Board board = new Board(3, boardState);
-        GameRules rules = new GameRules();
+        GameRules rules = new GameRules(board);
 
         assertTrue(rules.isGameOver(board, "X", "B"));
     }
