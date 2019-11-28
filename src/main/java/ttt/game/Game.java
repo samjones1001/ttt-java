@@ -1,8 +1,7 @@
 package ttt.game;
 
-import ttt.messaging.MessageBuilder;
-import ttt.service.ClientService;
-import ttt.player.Player;
+import ttt.game.messaging.MessageBuilder;
+import ttt.game.player.Player;
 
 import java.util.ArrayList;
 
@@ -10,10 +9,9 @@ public class Game {
     private Player currentPlayer;
     private Player opponent;
     private Board board;
-    private ClientService userInterface;
+    private UserInterface userInterface;
     private GameRules rules;
     private String previousMove;
-    private MessageBuilder messageBuilder;
 
     private static final String gameOverBaseString = "Game Over - ";
     private static final String tieString = "It's a Tie!";
@@ -22,13 +20,12 @@ public class Game {
     private static final String opponentMoveBaseString = " %s took space %s.";
     private static final int humanReadableIndexModifier = 1;
 
-    public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
+    public Game(Player currentPlayer, Player opponent, Board board, UserInterface userInterface) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;
         this.userInterface = userInterface;
-        this.rules = new GameRules();
-        this.messageBuilder = new MessageBuilder();
+        this.rules = new GameRules(board);
     }
 
     public Player getCurrentPlayer() {
@@ -93,14 +90,14 @@ public class Game {
     }
 
     private String winningPlayerMessage() {
-        return messageBuilder.buildMessage(winningPlayerBaseString, opponent.getName());
+        return MessageBuilder.buildMessage(winningPlayerBaseString, opponent.getName());
     }
 
     private String turnStartMessage() {
-        String message = messageBuilder.buildMessage(turnStartBaseString, currentPlayer.getName());
+        String message = MessageBuilder.buildMessage(turnStartBaseString, currentPlayer.getName());
         if (previousMove != null) {
             message +=  opponentMoveBaseString;
-            return messageBuilder.buildMessage(message, opponent.getName(), previousMove);
+            return MessageBuilder.buildMessage(message, opponent.getName(), previousMove);
         }
         return message;
     }

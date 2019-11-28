@@ -1,4 +1,4 @@
-package ttt.player;
+package ttt.game.player;
 
 import ttt.game.Game;
 

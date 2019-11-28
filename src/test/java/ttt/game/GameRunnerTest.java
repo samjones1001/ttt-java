@@ -2,8 +2,9 @@ package ttt.game;
 
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
+import ttt.console.ConsoleGameRunner;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.HumanPlayer;
+import ttt.game.player.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,11 +16,11 @@ public class GameRunnerTest {
     public void createsAGameFromThePassedConfigObject() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
         Console console = new Console(mockConsoleIO);
-        GameRunner runner = new GameRunner(console);
+        ConsoleGameRunner runner = new ConsoleGameRunner(console);
 
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board(new String[] {"X", "X", "X", "X", "O", "X", "X", "X", "O"});
+        Board board = new Board(3, new String[] {"X", "X", "X", "X", "O", "X", "X", "X", "O"});
         GameConfig config = new GameConfig(player1, player2, board);
 
         runner.run(config);
@@ -35,11 +36,11 @@ public class GameRunnerTest {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7", "6", "9", "8"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
-        GameRunner runner = new GameRunner(console);
+        ConsoleGameRunner runner = new ConsoleGameRunner(console);
 
         HumanPlayer player1 = new HumanPlayer("Player 1", "X", console);
         HumanPlayer player2 = new HumanPlayer("Player 2", "O", console);
-        Board board = new Board();
+        Board board = new Board(3);
         GameConfig config = new GameConfig(player1, player2, board);
 
         runner.run(config);

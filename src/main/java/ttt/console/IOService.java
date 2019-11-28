@@ -1,4 +1,4 @@
-package ttt.service;
+package ttt.console;
 
 public interface IOService {
     String input();

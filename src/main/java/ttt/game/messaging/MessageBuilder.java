@@ -1,4 +1,4 @@
-package ttt.messaging;
+package ttt.game.messaging;
 
 import java.util.Formatter;
 

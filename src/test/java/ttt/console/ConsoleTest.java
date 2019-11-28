@@ -20,7 +20,7 @@ public class ConsoleTest {
 
     @Test
     void correctlyDisplaysAnEmptyBoard() {
-        String expectedOutput = " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ";
+        String expectedOutput = " 1  | 2  | 3  \n---------------\n 4  | 5  | 6  \n---------------\n 7  | 8  | 9  ";
         Object[] boardState = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         String output = printedBoard(boardState);
@@ -29,8 +29,18 @@ public class ConsoleTest {
     }
 
     @Test
+    void correctlyDisplaysA4x4Board() {
+        String expectedOutput = " 1  | 2  | 3  | 4  \n-------------------\n 5  | 6  | 7  | 8  \n-------------------\n 9  | 10 | 11 | 12 \n-------------------\n 13 | 14 | 15 | 16 ";
+        Object[] boardState = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+
+        String output = printedBoard(boardState);
+
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
     void correctlyDisplaysAPartiallyFilledBoard() {
-        String expectedOutput = " X | O | X \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ";
+        String expectedOutput = " X  | O  | X  \n---------------\n 4  | 5  | 6  \n---------------\n 7  | 8  | 9  ";
         Object[] boardState = {'X', 'O', 'X', 4, 5, 6, 7, 8, 9};
 
         String output = printedBoard(boardState);
@@ -40,7 +50,7 @@ public class ConsoleTest {
 
     @Test
     void correctlyDisplaysAFilledBoard() {
-        String expectedOutput = " X | O | X \n-----------\n O | X | O \n-----------\n X | O | X ";
+        String expectedOutput = " X  | O  | X  \n---------------\n O  | X  | O  \n---------------\n X  | O  | X  ";
         Object[] boardState = {'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'};
 
         String output = printedBoard(boardState);

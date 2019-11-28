@@ -1,10 +1,11 @@
 package ttt.console;
 
 import org.junit.jupiter.api.Test;
+import ttt.game.Board;
 import ttt.game.GameConfig;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.HumanPlayer;
-import ttt.player.UnbeatablePlayer;
+import ttt.game.player.HumanPlayer;
+import ttt.game.player.UnbeatablePlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MenuTest {
     @Test
     void allowsAUserToSelectPlayerType() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2"));
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
@@ -27,8 +28,8 @@ public class MenuTest {
     }
 
     @Test
-    void constinuesToPromptUntilProvidedAValidPlayerType() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("Not Valid", "3", "1", "-5", "!", " ", "", "2"));
+    void continuesToPromptUntilProvidedAValidPlayerType() {
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("Not Valid", "3", "1", "-5", "!", " ", "", "2", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
@@ -40,26 +41,52 @@ public class MenuTest {
     }
 
     @Test
-    void printsWelcomeMessageAndTwoPlayerSelectionMessages() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2"));
+    void printsWelcomeMessageTwoPlayerSelectionMessagesAndBoardSelectionMessage() {
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
 
         menu.start();
 
-        assertEquals(3, mockConsoleIO.outputCallCount);
+        assertEquals(4, mockConsoleIO.outputCallCount);
     }
 
     @Test
-    void clearsOutputOnGameStartAndPlayerTwoSelection() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2"));
+    void clearsOutputOnGameStartPlayerTwoSelectionAndBoardSelection() {
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
 
         menu.start();
 
-        assertEquals(2, mockConsoleIO.clearCallCount);
+        assertEquals(3, mockConsoleIO.clearCallCount);
+    }
+
+    @Test
+    void allowsUsertoSelectA3x3Grid() {
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "1", "1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Menu menu = new Menu(console);
+
+        GameConfig config = menu.start();
+        Board board = config.getBoard();
+
+        assertEquals(9, board.getSpaces().length);
+    }
+
+    @Test
+    void allowsUsertoSelectA4x4Grid() {
+        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "1", "2"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Menu menu = new Menu(console);
+
+        GameConfig config = menu.start();
+        Board board = config.getBoard();
+
+        assertEquals(16, board.getSpaces().length);
     }
 }

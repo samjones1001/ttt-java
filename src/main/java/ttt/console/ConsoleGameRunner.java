@@ -1,12 +1,14 @@
-package ttt.game;
+package ttt.console;
 
-import ttt.service.ClientService;
+import ttt.game.Game;
+import ttt.game.GameConfig;
+import ttt.game.UserInterface;
 
-public class GameRunner {
+public class ConsoleGameRunner {
     private Game game;
-    private ClientService userInterface;
+    private UserInterface userInterface;
 
-    public GameRunner(ClientService userInterface) {
+    public ConsoleGameRunner(UserInterface userInterface) {
         this.userInterface = userInterface;
     }
 

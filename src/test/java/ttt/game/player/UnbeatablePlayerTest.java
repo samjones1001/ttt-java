@@ -1,4 +1,4 @@
-package ttt.player;
+package ttt.game.player;
 
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
@@ -16,7 +16,7 @@ public class UnbeatablePlayerTest {
         Console console = new Console(consoleIO);
         Player player = new UnbeatablePlayer("Player 1", "X");
         Player player2 = new UnbeatablePlayer("Player 2", "O");
-        Board board = new Board(boardState);
+        Board board = new Board(3, boardState);
         Game game = new Game(player, player2, board, console);
 
         assertEquals(8, player.getMove(game));
@@ -29,7 +29,7 @@ public class UnbeatablePlayerTest {
         Console console = new Console(consoleIO);
         Player player = new UnbeatablePlayer("Player 1", "X");
         Player player2 = new UnbeatablePlayer("Player 2", "O");
-        Board board = new Board(boardState);
+        Board board = new Board(3, boardState);
         Game game = new Game(player, player2, board, console);
 
         assertEquals(2, player.getMove(game));
@@ -42,7 +42,7 @@ public class UnbeatablePlayerTest {
         Console console = new Console(consoleIO);
         Player player = new UnbeatablePlayer("Player 1", "X");
         Player player2 = new UnbeatablePlayer("Player 2", "O");
-        Board board = new Board(boardState);
+        Board board = new Board(3, boardState);
         Game game = new Game(player, player2, board, console);
 
         assertEquals(7, player.getMove(game));
@@ -55,7 +55,7 @@ public class UnbeatablePlayerTest {
         Console console = new Console(consoleIO);
         Player player = new UnbeatablePlayer("Player 1", "X");
         Player player2 = new UnbeatablePlayer("Player 2", "O");
-        Board board = new Board(boardState);
+        Board board = new Board(3, boardState);
         Game game = new Game(player, player2, board, console);
 
         assertEquals(2, player.getMove(game));

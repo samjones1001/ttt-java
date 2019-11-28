@@ -1,16 +1,16 @@
-package ttt.player;
+package ttt.game.player;
 
 import ttt.game.Game;
-import ttt.service.ClientService;
+import ttt.game.UserInterface;
 
 public class HumanPlayer implements Player {
     private String name;
     private String marker;
-    private ClientService userInterface;
+    private UserInterface userInterface;
 
     private static final String moveError = "Please Provide Valid Input";
 
-    public HumanPlayer(String name, String marker, ClientService userInterface) {
+    public HumanPlayer(String name, String marker, UserInterface userInterface) {
         this.name = name;
         this.marker = marker;
         this.userInterface = userInterface;
