@@ -1,6 +1,6 @@
 package ttt.game;
 
-import ttt.player.Player;
+import ttt.game.player.Player;
 
 public class GameConfig {
     private Player currentPlayer;

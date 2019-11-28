@@ -1,4 +1,4 @@
-package ttt.player;
+package ttt.game.player;
 
 import ttt.game.Board;
 import ttt.game.Game;
@@ -40,7 +40,7 @@ public class UnbeatablePlayer implements Player {
         for (Integer move : board.availableSpaces()) {
             Board newBoard = board.occupySpace(thisPlayerMarker, (int) move);
 
-            int score = minimax(newBoard, 5, -100, 100,  opponentMarker);
+            int score = minimax(newBoard, 0, -100, 100,  opponentMarker);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
@@ -57,14 +57,14 @@ public class UnbeatablePlayer implements Player {
 
     private int minimax(Board board, int depth, int alpha, int beta, String nextMarker) {
         Integer score = getScore(board);
-        if (rules.isGameOver(board, thisPlayerMarker, opponentMarker) || depth == 0) {
+        if (rules.isGameOver(board, thisPlayerMarker, opponentMarker) || depth == 5) {
             return score;
         }
 
         if (nextMarker.equals(thisPlayerMarker)) {
-            return maximise(board,depth-1, alpha, beta, nextMarker);
+            return maximise(board,depth+1, alpha, beta, nextMarker);
         } else {
-            return minimise(board,depth-1, alpha, beta, nextMarker);
+            return minimise(board,depth+1, alpha, beta, nextMarker);
         }
     }
 

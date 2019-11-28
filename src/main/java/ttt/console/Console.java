@@ -1,7 +1,6 @@
 package ttt.console;
 
-import ttt.service.IOService;
-import ttt.service.ClientService;
+import ttt.game.UserInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +9,7 @@ import java.util.stream.IntStream;
 
 import static java.lang.StrictMath.sqrt;
 
-public class Console implements ClientService {
+public class Console implements UserInterface {
     private IOService consoleIO;
 
     private static final String rowSplitter = " | ";

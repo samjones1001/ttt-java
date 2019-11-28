@@ -1,7 +1,5 @@
 package ttt.console;
 
-import ttt.service.IOService;
-
 import java.util.Scanner;
 
 public class ConsoleIO implements IOService {

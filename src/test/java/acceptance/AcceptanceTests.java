@@ -6,9 +6,9 @@ import ttt.console.Console;
 import ttt.game.Board;
 import ttt.game.Game;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.UnbeatablePlayer;
-import ttt.service.ClientService;
-import ttt.player.Player;
+import ttt.game.player.UnbeatablePlayer;
+import ttt.game.UserInterface;
+import ttt.game.player.Player;
 
 import java.io.*;
 
@@ -135,7 +135,7 @@ class AcceptanceTests {
     @Test
     void takesNoLongerThanASecondForAnUnbeatablePlayerToMakeAMoveOnAnEmpty3x3Grid() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
-        ClientService console = new Console(mockConsoleIO);
+        UserInterface console = new Console(mockConsoleIO);
         Player playerOne = new UnbeatablePlayer("Player 1", "X");
         Player playerTwo = new UnbeatablePlayer("Player 2", "O");
         Game game = new Game(playerOne, playerTwo, new Board(3), console);
@@ -150,7 +150,7 @@ class AcceptanceTests {
     @Test
     void takesNoLongerThanASecondForAnUnbeatablePlayerToMakeAMoveOnAnEmpty4x4Grid() {
         MockConsoleIO mockConsoleIO = new MockConsoleIO();
-        ClientService console = new Console(mockConsoleIO);
+        UserInterface console = new Console(mockConsoleIO);
         Player playerOne = new UnbeatablePlayer("Player 1", "X");
         Player playerTwo = new UnbeatablePlayer("Player 2", "O");
         Game game = new Game(playerOne, playerTwo, new Board(3), console);

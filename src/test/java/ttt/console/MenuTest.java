@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import ttt.game.Board;
 import ttt.game.GameConfig;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.HumanPlayer;
-import ttt.player.UnbeatablePlayer;
+import ttt.game.player.HumanPlayer;
+import ttt.game.player.UnbeatablePlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

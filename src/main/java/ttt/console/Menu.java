@@ -2,16 +2,16 @@ package ttt.console;
 
 import ttt.game.Board;
 import ttt.game.GameConfig;
-import ttt.messaging.MessageBuilder;
-import ttt.player.Player;
-import ttt.player.PlayerFactory;
-import ttt.service.ClientService;
+import ttt.game.messaging.MessageBuilder;
+import ttt.game.player.Player;
+import ttt.game.player.PlayerFactory;
+import ttt.game.UserInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    private ClientService userInterface;
+    private UserInterface userInterface;
 
     private final static String welcomeMessage = "Welcome to Tic-Tac-Toe!";
     private final static String playerSelectionMessage = "Select a type for %s\n\n1) Human Player\n2) Unbeatable Computer Player";
@@ -40,7 +40,7 @@ public class Menu {
     };
 
 
-    public Menu(ClientService userInterface) {
+    public Menu(UserInterface userInterface) {
         this.userInterface = userInterface;
     }
 
@@ -61,7 +61,7 @@ public class Menu {
         return createPlayer(playerTypes.get(userInput),name, marker, userInterface);
     }
 
-    private Player createPlayer(String type, String name, String marker, ClientService console) {
+    private Player createPlayer(String type, String name, String marker, UserInterface console) {
         return PlayerFactory.create(type, name, marker, console);
     }
 

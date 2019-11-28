@@ -1,8 +1,7 @@
 package ttt.game;
 
-import ttt.messaging.MessageBuilder;
-import ttt.service.ClientService;
-import ttt.player.Player;
+import ttt.game.messaging.MessageBuilder;
+import ttt.game.player.Player;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ public class Game {
     private Player currentPlayer;
     private Player opponent;
     private Board board;
-    private ClientService userInterface;
+    private UserInterface userInterface;
     private GameRules rules;
     private String previousMove;
 
@@ -21,7 +20,7 @@ public class Game {
     private static final String opponentMoveBaseString = " %s took space %s.";
     private static final int humanReadableIndexModifier = 1;
 
-    public Game(Player currentPlayer, Player opponent, Board board, ClientService userInterface) {
+    public Game(Player currentPlayer, Player opponent, Board board, UserInterface userInterface) {
         this.currentPlayer = currentPlayer;
         this.opponent = opponent;
         this.board = board;

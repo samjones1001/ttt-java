@@ -2,7 +2,7 @@ package ttt.game;
 
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
-import ttt.player.HumanPlayer;
+import ttt.game.player.HumanPlayer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

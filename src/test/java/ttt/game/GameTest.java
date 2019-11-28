@@ -3,7 +3,7 @@ package ttt.game;
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;
 import ttt.mocks.MockConsoleIO;
-import ttt.player.HumanPlayer;
+import ttt.game.player.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package ttt.mocks;
 
-import ttt.service.IOService;
+import ttt.console.IOService;
 
 import java.util.ArrayList;
 

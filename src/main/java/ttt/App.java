@@ -4,17 +4,16 @@ import ttt.console.Console;
 import ttt.console.ConsoleIO;
 import ttt.console.Menu;
 import ttt.game.GameConfig;
-import ttt.game.GameRunner;
-import ttt.service.IOService;
+import ttt.console.ConsoleGameRunner;
+import ttt.console.IOService;
+import ttt.game.UserInterface;
 
 class App {
     public static IOService consoleIO = new ConsoleIO();
 
-
-
     public static void main(String[] args) {
-        Console console = new Console(consoleIO);
-        GameRunner runner = new GameRunner(console);
+        UserInterface console = new Console(consoleIO);
+        ConsoleGameRunner runner = new ConsoleGameRunner(console);
         Menu menu = new Menu(console);
         GameConfig config = menu.start();
 

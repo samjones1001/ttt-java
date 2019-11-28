@@ -1,4 +1,4 @@
-package ttt.player;
+package ttt.game.player;
 
 import org.junit.jupiter.api.Test;
 import ttt.console.Console;

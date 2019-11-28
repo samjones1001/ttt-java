@@ -1,6 +1,6 @@
-package ttt.service;
+package ttt.game;
 
-public interface ClientService {
+public interface UserInterface {
     void displayBoard(Object[] boardState);
 
     void displayOutput(String message);
