@@ -87,11 +87,11 @@ public class Console implements UserInterface {
     }
 
     private String padCell(String cell) {
-        return isSingleCharacterCell(cell) ? cell + padderCharacter : cell;
+        return isDoubleDigitCellIndex(cell) ? cell : cell + padderCharacter;
     }
 
-    private boolean isSingleCharacterCell(String cell) {
-        return cell.length() == 1;
+    private boolean isDoubleDigitCellIndex(String cell) {
+        return cell.length() == 2;
     }
 
     private String padRow(String rowString) {

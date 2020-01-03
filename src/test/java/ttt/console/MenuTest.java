@@ -3,6 +3,7 @@ package ttt.console;
 import org.junit.jupiter.api.Test;
 import ttt.game.Board;
 import ttt.game.GameConfig;
+import ttt.game.player.Player;
 import ttt.mocks.MockConsoleIO;
 import ttt.game.player.HumanPlayer;
 import ttt.game.player.UnbeatablePlayer;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MenuTest {
     @Test
     void allowsAUserToSelectPlayerType() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "2", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
@@ -25,11 +26,38 @@ public class MenuTest {
 
         assertTrue(config.getCurrentPlayer() instanceof HumanPlayer);
         assertTrue(config.getOpponent() instanceof UnbeatablePlayer);
+    }
+
+    @Test
+    void allowsUserToSelectMarkerColour() {
+        String xWithAnsiRedModifier = "\u001B[31mX\u001B[0m";
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "1", "2", "", "1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Menu menu = new Menu(console);
+
+        GameConfig config = menu.start();
+        Player playerOne = config.getCurrentPlayer();
+
+        assertEquals(xWithAnsiRedModifier, playerOne.getMarker());
+    }
+
+    @Test
+    void markersAreUncolouredByDefault() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "2", "", "1"));
+        MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
+        Console console = new Console(mockConsoleIO);
+        Menu menu = new Menu(console);
+
+        GameConfig config = menu.start();
+        Player playerOne = config.getCurrentPlayer();
+
+        assertEquals("X", playerOne.getMarker());
     }
 
     @Test
     void continuesToPromptUntilProvidedAValidPlayerType() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("Not Valid", "3", "1", "-5", "!", " ", "", "2", "1"));
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("Not Valid", "3", "1", "", "-5", "!", " ", "", "2", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
@@ -41,32 +69,32 @@ public class MenuTest {
     }
 
     @Test
-    void printsWelcomeMessageTwoPlayerSelectionMessagesAndBoardSelectionMessage() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
+    void printsWelcomeMessageFourPlayerSetupMessagesAndBoardSelectionMessage() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "2", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
 
         menu.start();
 
-        assertEquals(4, mockConsoleIO.outputCallCount);
+        assertEquals(6, mockConsoleIO.outputCallCount);
     }
 
     @Test
-    void clearsOutputOnGameStartPlayerTwoSelectionAndBoardSelection() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "2", "1"));
+    void clearsOutputOnGameStartPlayerTwoSelectionMarkerColourSelectionsAndBoardSelection() {
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "2", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
 
         menu.start();
 
-        assertEquals(3, mockConsoleIO.clearCallCount);
+        assertEquals(5, mockConsoleIO.clearCallCount);
     }
 
     @Test
     void allowsUsertoSelectA3x3Grid() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "1", "1"));
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "1", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);
@@ -79,7 +107,7 @@ public class MenuTest {
 
     @Test
     void allowsUsertoSelectA4x4Grid() {
-        ArrayList<String> inputs = new ArrayList<String>(Arrays.asList("1", "1", "2"));
+        ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "1", "", "2"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
         Menu menu = new Menu(console);

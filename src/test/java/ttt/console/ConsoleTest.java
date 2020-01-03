@@ -59,6 +59,16 @@ public class ConsoleTest {
     }
 
     @Test
+    void correctlyDisplaysABoardWithColourisedMarkers() {
+        String expectedOutput = " \u001B[31mX\u001B[0m  | O  | \u001B[31mX\u001B[0m  \n---------------\n 4  | 5  | 6  \n---------------\n 7  | 8  | 9  ";
+        Object[] boardState = {"\u001B[31mX\u001B[0m", 'O', "\u001B[31mX\u001B[0m", 4, 5, 6, 7, 8, 9};
+
+        String output = printedBoard(boardState);
+
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
     void returnsValidInputs() {
         String[] validInputs = new String[] {"1"};
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1"));

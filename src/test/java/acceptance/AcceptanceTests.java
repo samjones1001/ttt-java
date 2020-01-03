@@ -25,7 +25,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"1", "1", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
+        var inputs = new String[] {"1", "", "1", "", "1", "1", "2", "3", "4", "5", "7", "6", "9", "8"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -83,7 +83,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"1", "1", "1", "1", "2", "3", "4", "5", "6", "7"};
+        var inputs = new String[] {"1", "", "1", "", "1", "1", "2", "3", "4", "5", "6", "7"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
@@ -112,7 +112,7 @@ class AcceptanceTests {
         var output = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         var err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        var inputs = new String[] {"1", "1", "2", "1", "2", "3", "4", "5", "7", "6", "9", "8", "10", "11", "12", "13", "14", "15", "16"};
+        var inputs = new String[] {"1", "", "1", "", "2", "1", "2", "3", "4", "5", "7", "6", "9", "8", "10", "11", "12", "13", "14", "15", "16"};
         for (int index = 0; index <= inputs.length - 1; index++) {
             output.write(inputs[index]);
             output.newLine();
