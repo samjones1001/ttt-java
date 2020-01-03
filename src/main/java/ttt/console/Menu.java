@@ -87,6 +87,7 @@ public class Menu {
     }
 
     private String selectPlayerMarkerColour(String name, String marker) {
+        userInterface.clear();
         userInterface.displayOutput(MessageBuilder.buildMessage(markerColourSelectionMessage, name));
         String userInput = userInterface.getAndValidateInput(markerColourMenuInputs, menuSelectionErrorMessage);
         return String.format(markerColours.get(userInput), marker);

@@ -81,7 +81,7 @@ public class MenuTest {
     }
 
     @Test
-    void clearsOutputOnGameStartPlayerTwoSelectionAndBoardSelection() {
+    void clearsOutputOnGameStartPlayerTwoSelectionMarkerColourSelectionsAndBoardSelection() {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList("1", "", "2", "", "1"));
         MockConsoleIO mockConsoleIO = new MockConsoleIO(inputs);
         Console console = new Console(mockConsoleIO);
@@ -89,7 +89,7 @@ public class MenuTest {
 
         menu.start();
 
-        assertEquals(3, mockConsoleIO.clearCallCount);
+        assertEquals(5, mockConsoleIO.clearCallCount);
     }
 
     @Test
